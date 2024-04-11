@@ -74,4 +74,39 @@ where:
 The ARMA model is commonly used for time series forecasting and can be estimated using various methods, such as maximum likelihood estimation or least squares estimation.
 
 
-# 
+# ARIMA Model
+ ARIMA includes an integration term, denoted as the "I" in ARIMA, which accounts for non-stationarity in the data. Non-stationarity refers to a situation where the statistical properties of a time series, such as mean and variance, change over time. ARIMA models can handle non-stationary data by differencing the series to achieve stationarity.
+
+In ARIMA models, the integration order (denoted as "d") specifies how many times differencing is required to achieve stationarity. This is a parameter that needs to be determined or estimated from the data. ARMA models do not involve this integration order parameter since they assume stationary data.
+
+e.g y_t original series
+First Order ARIMA will be: z_t = y_t+1 - y_t
+Second Order ARIMA will be: k_t = z_t+1 - z_t
+
+# SARIMA
+
+SARIMA stands for Seasonal AutoRegressive Integrated Moving Average model. It is an extension of the ARIMA model that incorporates seasonality into the modeling process. SARIMA models are particularly useful when dealing with time series data that exhibit seasonal patterns.
+
+Seasonality refers to regular patterns or fluctuations in a time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly.
+Seasonality is often caused by external factors like weather, holidays, or economic cycles.
+Seasonal patterns tend to repeat consistently over time.
+
+How to address seasonality in time-series models:
+* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns.
+
+* Remove Seasonality: Once the seasonal component has been identified, it needs to be removed from the original data. This can be achieved by differencing the data at seasonal intervals. For example, if the data exhibits monthly seasonality, you can difference the data by subtracting each observation from the observation from the same month in the previous year.
+
+* Fit ARIMA Model: After removing seasonality, fit an ARIMA model to the deseasonalized data. ARIMA models are effective for modeling the remaining non-seasonal components of the time series, including trend and random noise.
+
+
+
+Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period.
+Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns.
+Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
+In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
+
+
+
+
+                               
+
