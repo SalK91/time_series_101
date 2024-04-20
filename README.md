@@ -74,7 +74,7 @@ where:
 The ARMA model is commonly used for time series forecasting and can be estimated using various methods, such as maximum likelihood estimation or least squares estimation.
 
 
-# ARIMA Model
+## ARIMA Model
  ARIMA includes an integration term, denoted as the "I" in ARIMA, which accounts for non-stationarity in the data. Non-stationarity refers to a situation where the statistical properties of a time series, such as mean and variance, change over time. ARIMA models can handle non-stationary data by differencing the series to achieve stationarity.
 
 In ARIMA models, the integration order (denoted as "d") specifies how many times differencing is required to achieve stationarity. This is a parameter that needs to be determined or estimated from the data. ARMA models do not involve this integration order parameter since they assume stationary data.
@@ -83,7 +83,7 @@ e.g y_t original series
 First Order ARIMA will be: z_t = y_t+1 - y_t
 Second Order ARIMA will be: k_t = z_t+1 - z_t
 
-# SARIMA
+## SARIMA
 
 SARIMA stands for Seasonal AutoRegressive Integrated Moving Average model. It is an extension of the ARIMA model that incorporates seasonality into the modeling process. SARIMA models are particularly useful when dealing with time series data that exhibit seasonal patterns.
 
@@ -118,6 +118,50 @@ Cycles can be influenced by economic factors, business cycles, or other structur
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 
+# 5. ARCH Model
+ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of models used in econometrics and financial econometrics to analyze time series data, particularly in the context of volatility clustering. These models are designed to capture the time-varying volatility or heteroskedasticity in financial time series data, where the volatility of the series may change over time.
+
+The basic idea behind ARCH models is that the variance of a time series can be modeled as a function of its own past values, along with possibly some exogenous variables. In other words, the variance at any given time is conditional on the past observations of the series. 
+
+
+In an ARCH(p) model, the conditional variance of a time series \( y_t \) at time \( t \) is modeled as a linear function of its own past squared residuals, where \( p \) denotes the order of the model, i.e., the number of past squared residuals considered. The model can be represented as:
+
+$$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 \varepsilon^2_{t-1} + \alpha_2 \varepsilon^2_{t-2} + \ldots + \alpha_p \varepsilon^2_{t-p} $$
+
+where:
+ 
+- $ \sigma^2_t $ is the conditional variance of the time series at time t.
+- $\varepsilon_t$ is the residual (or error term) at time t.
+- $\alpha_0, \alpha_1, \alpha_2, \ldots, \alpha_p$ are parameters to be estimated.
+- $p$ is the order of the ARCH model, indicating how many past squared residuals are included in the model.
+
+To estimate the parameters, one typically uses maximum likelihood estimation (MLE) or other estimation techniques. Once the parameters are estimated, the model can be used to forecast the conditional variance of the time series into the future.
+
+###  ARCH(1) Model
+
+$$ Var(y_t|y_{t-1}) = \sigma_t^2 = \alpha_0 + \alpha_1*y_{t-1}^2 $$
+assuming series has mean =0
+
+$$y_t = \sigma_t * \epsilon_t = \epsilon_t* \sqrt{\alpha_0 + \alpha_1*y_{t-1}^2} $$
+
+## GARCH Model
+
+Review:
+1. AR Model -  current state is function of previous states plus random error (white noise) e.g.
+    -  AR(1) model: $a_t = \phi * a_{t-1} + \epsilon_t$
+
+2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state ) e.g.
+    -  ARMA(1,1) model: $a_t = \phi * a_{t-1} + \beta*\epsilon*_{t-1} + \epsilon_t$
+
+3. ARCH Model -  models the volatality of time-series. It models time series as a function of previous state and error in form of product of random error (white noise) time its standard-deviation.
+
+
+GARCH model is extenstion of ARCH Model. It models time series as a function of previous states value as well volatality. GARCH compared to ARCH takes volatality of time-series into account.
+
+ARCH model is **bursty**. 
+GARCH(1,1):
+
+$$y_t = \sigma_t * \epsilon_t = \epsilon_t* \sqrt{\alpha_0 + \alpha_1*y_{t-1}^2 + \beta*\sigma_{t-1}^2} $$
 
 
 
