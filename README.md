@@ -24,7 +24,12 @@ How to check for stationary:
     3. Augmented Dickey Fuller Test
     
 How to make Time Series Stationary if it is not stationary?
-* Difference with last value
+* Differencing:  e.g First-order Differencing: Subtract the previous observation from the current observation. If the time series has seasonality, seasonal differencing can be applied.
+* Transformations: Transformations like logarithm, square root, or Box-Cox can stabilize the variance.
+* Decomposition: Decompose the time series into trend, seasonal, and residual components.
+* Detrending e.g. Subtracting the Rolling Mean or Fitting and Removing a Linear Trend.
+
+
 
 # White Noise
 • Mean =0
@@ -121,50 +126,76 @@ In summary, while both seasonality and cycles involve patterns of variation in t
 # 5. ARCH Model
 ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of models used in econometrics and financial econometrics to analyze time series data, particularly in the context of volatility clustering. These models are designed to capture the time-varying volatility or heteroskedasticity in financial time series data, where the volatility of the series may change over time.
 
+> In statistics, a sequence of random variables is homoscedastic if all its random variables have the same finite variance; this is also known as homogeneity of variance. The complementary notion is called heteroscedasticity, also known as heterogeneity of variance [1]
+
 The basic idea behind ARCH models is that the variance of a time series can be modeled as a function of its own past values, along with possibly some exogenous variables. In other words, the variance at any given time is conditional on the past observations of the series. 
 
+### ARCH [1] Model Derivation
+It posits that the observed value at time t can be decomposed into an average component $\mu$ and a noise term $𝑎(𝑡)$
 
-In an ARCH(p) model, the conditional variance of a time series \( y_t \) at time \( t \) is modeled as a linear function of its own past squared residuals, where \( p \) denotes the order of the model, i.e., the number of past squared residuals considered. The model can be represented as:
+$$ 𝑦(𝑡)= \mu + 𝑎(𝑡) $$ 
 
-$$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 \varepsilon^2_{t-1} + \alpha_2 \varepsilon^2_{t-2} + \ldots + \alpha_p \varepsilon^2_{t-p} $$
+The noise term $𝑎(𝑡)$ is further defined as the product of a time dependent volatility term $\sigma(t)$ and a stochastic noise component $\epsilon (t)$
+
+$$𝑎(𝑡)=\sigma(𝑡) \epsilon(𝑡)$$
+
+
+In the ARCH model, the volatility term $\sigma(𝑡)$ is modeled as a function of past values of the noise term $a(t)$. Specifically, the ARCH(1) model (the simplest form) defines $\sigma (t)$ as:
+
+$$\sigma(t) = \sqrt{\alpha_0 + \alpha_1 * a^2 _{t-1}}$$ 
+ 
+Where $\alpha_0, \alpha_1$ are the parameters of the model and $𝑎_{𝑡−1}$ is the volatility at the last timestep.
+
+### ARCH [P] Model
+The ARCH(1) model can be generalized to an ARCH(q) model, where the volatility term depends on the past $p$ values of the noise term $a(t)$:
+
+$$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} + \ldots + \alpha_p a^2_{t-p} $$
 
 where:
- 
 - $ \sigma^2_t $ is the conditional variance of the time series at time t.
-- $\varepsilon_t$ is the residual (or error term) at time t.
+- $a_t$ is the error term at time t.
 - $\alpha_0, \alpha_1, \alpha_2, \ldots, \alpha_p$ are parameters to be estimated.
 - $p$ is the order of the ARCH model, indicating how many past squared residuals are included in the model.
 
+
+The final formulation of the ARCH(p) model is:
+
+1. The observed value:
+   $$y(t) = \mu + a(t)$$
+
+2. The noise term:
+   $$a(t) = \sigma(t) \epsilon(t)$$
+
+3. The volatility term:
+   $$\sigma^2(t) = \alpha_0 + \sum_{i=1}^{p} \alpha_i a^2(t-i)$$
+   where $\epsilon(t)$ is white noise with zero mean and unit variance ($ \epsilon(t) \sim N(0, 1) $).
+
+
 To estimate the parameters, one typically uses maximum likelihood estimation (MLE) or other estimation techniques. Once the parameters are estimated, the model can be used to forecast the conditional variance of the time series into the future.
 
-###  ARCH(1) Model
-
-$$ Var(y_t|y_{t-1}) = \sigma_t^2 = \alpha_0 + \alpha_1*y_{t-1}^2 $$
-assuming series has mean =0
-
-$$y_t = \sigma_t * \epsilon_t = \epsilon_t* \sqrt{\alpha_0 + \alpha_1*y_{t-1}^2} $$
-
 ## GARCH Model
-
-Review:
-1. AR Model -  current state is function of previous states plus random error (white noise) e.g.
-    -  AR(1) model: $a_t = \phi * a_{t-1} + \epsilon_t$
-
-2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state ) e.g.
-    -  ARMA(1,1) model: $a_t = \phi * a_{t-1} + \beta*\epsilon*_{t-1} + \epsilon_t$
-
-3. ARCH Model -  models the volatality of time-series. It models time series as a function of previous state and error in form of product of random error (white noise) time its standard-deviation.
-
-
 GARCH model is extenstion of ARCH Model. It models time series as a function of previous states value as well volatality. GARCH compared to ARCH takes volatality of time-series into account.
 
 ARCH model is **bursty**. 
-GARCH(1,1):
 
-$$y_t = \sigma_t * \epsilon_t = \epsilon_t* \sqrt{\alpha_0 + \alpha_1*y_{t-1}^2 + \beta*\sigma_{t-1}^2} $$
+ The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
+
+ $$\sigma^2(t) = \alpha_0 + \alpha_1 a^2(t-1) + \beta_1 \sigma^2(t-1)$$
+
+The ARCH and GARCH models are crucial in modeling time series data with time-varying volatility. ARCH models capture conditional heteroskedasticity by modeling volatility as a function of past squared errors, while GARCH models extend this to include past volatility terms, providing a more comprehensive framework for volatility modeling.
 
 
+# Review:
+1. AR [1] Model -  current state is function of previous states plus random error (white noise) e.g.
+    -  AR(1) model: $y_t = \phi y_{t-1} + \epsilon_t$
 
+2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state ) e.g.
+    -  ARMA(1,1) model: $y_t = \phi y_{t-1} + \beta \epsilon_{t-1} + \epsilon_t$
+
+3. ARCH Model -  models the volatality of time-series. It models time series as a function of previous state and error in form of product of random error (white noise) time its standard-deviation.
+
+## References
+1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 
 
 
