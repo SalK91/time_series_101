@@ -65,16 +65,18 @@ The moving average (MA) component of the ARMA model represents the linear relati
 
 The ARMA model can be represented by the following equation:
 
-Y_t = c + ϕ_1 * Y_(t-1) + ϕ_2 * Y_(t-2) + ... + ϕ_p * Y_(t-p) + ε_t + θ_1 * ε_(t-1) + θ_2 * ε_(t-2) + ... + θ_q * ε_(t-q)
+$$Y_t = c + \phi_1  Y_{t-1} + \phi_2 Y_{t-2} + ... + \phi_p  Y_{t-p} + \epsilon_t + \beta_1 \epsilon_{t-1} + \beta_2  \epsilon_{t-2} + ... + \beta_q  \epsilon_{t-q}$$
+
+
 
 where:
-- Y_t is the current value of the time series.
+- $Y_t$ is the current value of the time series.
 - c is a constant term.
-- ϕ_1, ϕ_2, ..., ϕ_p are the autoregressive coefficients.
-- ε_t is the current forecast error.
-- θ_1, θ_2, ..., θ_q are the moving average coefficients.
-- Y_(t-1), Y_(t-2), ..., Y_(t-p) are the lagged values of the time series.
-- ε_(t-1), ε_(t-2), ..., ε_(t-q) are the lagged forecast errors.
+- $\phi_1, \phi_2, ..., \phi_p$ are the autoregressive coefficients.
+- $ε_t$ is the current forecast error.
+- $\beta_1, \beta_2, ..., \beta_q$ are the moving average coefficients.
+- $Y_{t-1}, Y_{t-2}, ..., Y_{t-p}$ are the lagged values of the time series.
+- $\epsilon_{t-1}, \epsilon_{t-2}, ..., \epsilon_{t-q}$ are the lagged forecast errors.
 
 The ARMA model is commonly used for time series forecasting and can be estimated using various methods, such as maximum likelihood estimation or least squares estimation.
 
@@ -84,9 +86,10 @@ The ARMA model is commonly used for time series forecasting and can be estimated
 
 In ARIMA models, the integration order (denoted as "d") specifies how many times differencing is required to achieve stationarity. This is a parameter that needs to be determined or estimated from the data. ARMA models do not involve this integration order parameter since they assume stationary data.
 
-e.g y_t original series
-First Order ARIMA will be: z_t = y_t+1 - y_t
-Second Order ARIMA will be: k_t = z_t+1 - z_t
+e.g $y_t$ original series
+
+* First Order ARIMA will be: $z_t = y_{t+1} - y_t$
+* Second Order ARIMA will be: $k_t = z_{t+1} - z_t$
 
 ## SARIMA
 
@@ -189,7 +192,7 @@ The ARCH and GARCH models are crucial in modeling time series data with time-var
 1. AR [1] Model -  current state is function of previous states plus random error (white noise) e.g.
     -  AR(1) model: $y_t = \phi y_{t-1} + \epsilon_t$
 
-2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state ) e.g.
+2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state e.g.
     -  ARMA(1,1) model: $y_t = \phi y_{t-1} + \beta \epsilon_{t-1} + \epsilon_t$
 
 3. ARCH Model -  models the volatality of time-series. It models time series as a function of previous state and error in form of product of random error (white noise) time its standard-deviation.
