@@ -179,9 +179,7 @@ To estimate the parameters, one typically uses maximum likelihood estimation (ML
 ## GARCH Model
 GARCH model is extenstion of ARCH Model. It models time series as a function of previous states value as well volatality. GARCH compared to ARCH takes volatality of time-series into account.
 
-ARCH model is **bursty**. 
-
- The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
+The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
 
  $$\sigma^2(t) = \alpha_0 + \alpha_1 a^2(t-1) + \beta_1 \sigma^2(t-1)$$
 
@@ -189,13 +187,20 @@ The ARCH and GARCH models are crucial in modeling time series data with time-var
 
 
 # Review:
-1. AR [1] Model -  current state is function of previous states plus random error (white noise) e.g.
-    -  AR(1) model: $y_t = \phi y_{t-1} + \epsilon_t$
+* AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
 
-2. ARMA Model - On top of AR Model we have a the previous states random error influencing the current state e.g.
-    -  ARMA(1,1) model: $y_t = \phi y_{t-1} + \beta \epsilon_{t-1} + \epsilon_t$
+* AR Models: Used when the primary relationship in the data is between the current value and its own past values. Suitable for time series where residuals show no significant autocorrelation pattern, indicating that past values alone sufficiently explain the current observations.
 
-3. ARCH Model -  models the volatality of time-series. It models time series as a function of previous state and error in form of product of random error (white noise) time its standard-deviation.
+* ARMA Models: Employed when both past values and past forecast errors significantly influence the current value. This combination provides a more comprehensive model for capturing complex dynamics in time series data.
+
+* ARCH Models: Best suited for time series data with volatility clustering but lacking long-term persistence. ARCH models capture bursts of high and low volatility effectively by modeling changing variance over time based on past errors.
+
+* GARCH Models: Extend ARCH models by incorporating past variances, allowing them to handle more persistent volatility. GARCH models are better at capturing long-term dependencies in financial time series data, making them suitable for series with sustained periods of high or low volatility.
+
+
+![ARMA - GARCH Review](images/Figure_ARMA_GARCH_Review.png)
+
+
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
