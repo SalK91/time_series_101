@@ -133,7 +133,7 @@ ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of model
 
 The basic idea behind ARCH models is that the variance of a time series can be modeled as a function of its own past values, along with possibly some exogenous variables. In other words, the variance at any given time is conditional on the past observations of the series. 
 
-### ARCH [1] Model Derivation
+### ARCH (1) Model Derivation
 It posits that the observed value at time t can be decomposed into an average component $\mu$ and a noise term $𝑎(𝑡)$
 
 $$ 𝑦(𝑡)= \mu + 𝑎(𝑡) $$ 
@@ -149,8 +149,8 @@ $$\sigma(t) = \sqrt{\alpha_0 + \alpha_1 * a^2 _{t-1}}$$
  
 Where $\alpha_0, \alpha_1$ are the parameters of the model and $𝑎_{𝑡−1}$ is the volatility at the last timestep.
 
-### ARCH [P] Model
-The ARCH(1) model can be generalized to an ARCH(q) model, where the volatility term depends on the past $p$ values of the noise term $a(t)$:
+### ARCH (p) Model
+The ARCH(1) model can be generalized to an ARCH(p) model, where the volatility term depends on the past $p$ values of the noise term $a(t)$:
 
 $$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} + \ldots + \alpha_p a^2_{t-p} $$
 
@@ -186,7 +186,7 @@ The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
 The ARCH and GARCH models are crucial in modeling time series data with time-varying volatility. ARCH models capture conditional heteroskedasticity by modeling volatility as a function of past squared errors, while GARCH models extend this to include past volatility terms, providing a more comprehensive framework for volatility modeling.
 
 
-# Review:
+# 6. Review - ARMA & GARCH
 * AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
 
 * AR Models: Used when the primary relationship in the data is between the current value and its own past values. Suitable for time series where residuals show no significant autocorrelation pattern, indicating that past values alone sufficiently explain the current observations.
