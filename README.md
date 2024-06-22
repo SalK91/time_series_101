@@ -199,10 +199,44 @@ The ARCH and GARCH models are crucial in modeling time series data with time-var
 
 ![ARMA - GARCH Review](images/Figure_ARMA_GARCH_Review.png)
 
+# 5. Vector Autoregression
+
+Vector autoregressive models are used for multivariate time series. It is used capture the linear interdependencies among multiple time series. The VAR model generalizes the univariate autoregressive (AR) model by allowing for more than one evolving variable. The structure is that each variable is a linear function of past lags of itself and past lags of the other variables [2].
+
+
+### Three-Variable VAR(1) Model
+
+Consider a three-variable time series $ \mathbf{y}_t = (y_{1t}, y_{2t}, y_{3t})' $. The VAR(1) model for this time series can be written as:
+
+$$
+y_{t,1} = \alpha_{0,1} +  \alpha_{11}y_{t-1,1} +  \alpha_{12}y_{t-1,2} +  \alpha_{13}y_{t-1,3} + \epsilon_{t,1}
+$$
+
+$$
+y_{t,2} = \alpha_{0,2} +  \alpha_{21}y_{t-1,1} +  \alpha_{22}y_{t-1,2} +  \alpha_{23}y_{t-1,3} + \epsilon_{t,1}
+$$
+
+$$
+y_{t,3} = \alpha_{0,3} +  \alpha_{31}y_{t-1,1} +  \alpha_{32}y_{t-1,2} +  \alpha_{33}y_{t-1,3} + \epsilon_{t,1}
+$$
+
+i.e. each variable is a linear function of the lag 1 values for all variables in the set. This in matrix form can be expressed as:
+$$
+\mathbf{Y}_t = \mathbf{\alpha_0} + \mathbf{A}_1 \mathbf{Y}_{t-1} + \mathbf{\epsilon}_t
+$$
+
+
+where:
+- $ \mathbf{Y}_t$ is a 3x1 vector of time series variables at time $ t $.
+- $ \mathbf{\alpha_0} $ is a 3x1 vector of intercept terms.
+- $ \mathbf{A}_1 $ is  a 3x1 coefficient matrix.
+- $ \mathbf{\epsilon}_t $ is a  3x1 vector of error terms (white noise).
+
 
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
+2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 
 
 
