@@ -232,12 +232,24 @@ where:
 - $ \mathbf{A}_1 $ is  a 3x1 coefficient matrix.
 - $ \mathbf{\epsilon}_t $ is a  3x1 vector of error terms (white noise).
 
+# 6. Granger Causality
+> The Granger causality test is a statistical hypothesis test for determining whether one time series is useful in forecasting another [3]. It assesses whether past values of one variable $X$ provide statistically significant information about future values of another variable $Y$.
 
+1. The method involves constructing regression models:
+
+   - An AR model where $Y $is regressed on its own past values.
+   - A VAR model where $Y$ is regressed on its own past values and past values of $X$.
+
+2. Hypothesis Testing - The primary statistical test involves a null hypothesis that $X$ does not Granger-cause $Y$. If adding past values of $X$ improves the prediction of $Y$ significantly, the null hypothesis is rejected, indicating that $X$ Granger-causes $Y$.
+
+Granger causality does not imply true causality in the philosophical sense; it only indicates predictive causality based on the given data.
+
+ 
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
-
+3. https://en.wikipedia.org/wiki/Granger_causality
 
 
                                
