@@ -265,7 +265,9 @@ where:
 
 Granger causality does not imply true causality in the philosophical sense; it only indicates predictive causality based on the given data.
 
- 
+# 7. Model Selection
+
+
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
