@@ -269,6 +269,8 @@ Granger causality does not imply true causality in the philosophical sense; it o
 
 
 
+
+
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
