@@ -266,7 +266,10 @@ where:
 Granger causality does not imply true causality in the philosophical sense; it only indicates predictive causality based on the given data.
 
 # 7. Model Selection
+How to select the model and the order of model?
 
+1. AIC
+2. BIC
 
 
 
