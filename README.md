@@ -266,9 +266,11 @@ where:
 Granger causality does not imply true causality in the philosophical sense; it only indicates predictive causality based on the given data.
 
 # 7. Model Selection
-How to select the model and the order of model?
+When analyzing time series data, selecting the appropriate model e.g. AR vs ARMA and model's order is crucial for making accurate predictions. Model selecition methods include:
 
-1. AIC
+##  Akaike Information Criterion  (AIC)
+
+
 2. BIC
 
 
