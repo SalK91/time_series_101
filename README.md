@@ -268,12 +268,21 @@ Granger causality does not imply true causality in the philosophical sense; it o
 # 7. Model Selection
 When analyzing time series data, selecting the appropriate model e.g. AR vs ARMA and model's order is crucial for making accurate predictions. Model selecition methods include:
 
-##  Akaike Information Criterion  (AIC)
+###  Akaike Information Criterion  (AIC)
+$$AIC=2k−2ln(L)$$
+where,
+* $k$ - Number of parameters in the model
+* $L$ - Likelihood function for the model
 
+### Bayesian Information Criterion (BIC)
+$$BIC=kln(n)−2ln(L)$$
+where,
+* $k$ - Number of parameters in the model.
+* $n$ - Number of data points.
+* $L$ - Likelihood function for the model.
 
-2. BIC
-
-
+### Cross Validation
+Divide the time series into training and testing sets. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
 
 
 ## References
