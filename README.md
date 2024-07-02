@@ -285,11 +285,31 @@ where,
 Divide the time series into training and testing sets. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
 
 # 8. Anomaly Detection
+Anomalies refer to data values or events that deviate significantly from the normal trend. Detecting and correcting anomalies is crucial before any analysis of data, as anomalies can lead to incorrect results and conclusions. However, the time dependence and often non-stationary nature of time series data make anomaly detection particularly complex.
+
+Anomaly detection methods:
+
+1. Z-Score Method - calculates the standard score of each data point to identify anomalies.
+2. Moving Average with Standard Deviation -  deviation of the point from the rolling moving average and standard deviation.
+3. Isolation Forest - an ensemble method designed for anomaly detection.
+4. One-Class SVM - One-Class Support Vector Machines can be used for anomaly detection.
+5. Kmeans clustering - unsupervised clustering can help identify anomalies.
+6. STL decomposition - “Seasonal and Trend decomposition using Loess”  decomposes time series into it seasonal, trend, and residue components. Residue component can be used to identify anomalies.
+7. Detection using Forecasting -  In forecasting we predict each point based on past data points using a forecasting method such as ARMA model. The deviation of actual value from the prediction can be used to identify anomalies.
+
+# 9. Bayesian Time Series
+Bayesian time series modelling incorporates Bayesian statistical methods to model and analyze time-dependent data. It leverages prior distributions along with observed data to make inferences about the underlying processes generating the time series. Bayesian methods provide a coherent framework for incorporating prior knowledge and quantifying uncertainty in parameter estimates.
+
+
+## Read this boo
+https://otexts.com/fpp2/
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 3. https://en.wikipedia.org/wiki/Granger_causality
+
+
 
 
                                
