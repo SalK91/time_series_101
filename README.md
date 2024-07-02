@@ -284,6 +284,7 @@ where,
 ### Cross Validation
 Divide the time series into training and testing sets. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
 
+# 8. Anomaly Detection
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
