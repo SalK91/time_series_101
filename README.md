@@ -300,9 +300,14 @@ Anomaly detection methods:
 # 9. Bayesian Time Series
 Bayesian time series modelling incorporates Bayesian statistical methods to model and analyze time-dependent data. It leverages prior distributions along with observed data to make inferences about the underlying processes generating the time series. Bayesian methods provide a coherent framework for incorporating prior knowledge and quantifying uncertainty in parameter estimates.
 
+# 10. Recurrent Neural Networks
 
 ## Read this boo
 https://otexts.com/fpp2/
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/steel/steel_homepage/bayesiantsrev.pdf
+State spaxe model
+
+https://www.pymc.io/projects/docs/en/stable/learn.html
 
 ## References
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
