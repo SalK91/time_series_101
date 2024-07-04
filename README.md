@@ -1,5 +1,10 @@
-Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends
+Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
 
+Time series data are characterized by three key patterns:
+* Trend: This pattern indicates a long-term increase or decrease in the data.
+* Seasonal: A seasonal pattern arises when a time series is influenced by seasonal factors, such as the time of year or day of the week. Seasonality occurs at a fixed and known period.
+* Cyclic: A cyclic pattern appears when the data show rises and falls that do not occur at a fixed frequency. These fluctuations are usually driven by economic conditions and are often linked to the "business cycle," typically lasting at least two years [0].
+ 
 ## 0. Data Preprocessing
 Steps for pre-processing of time-series data:
 
@@ -22,6 +27,8 @@ Steps for pre-processing of time-series data:
 9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
 
 
+## Time Series Characteristics
+
 ## 1. Auto-correlation and Partial Auto-correlation
 Auto-correlation and partial auto-correlation are statistical measures used in time series analysis to understand the relationship between data points in a sequence.
 
@@ -35,6 +42,7 @@ Both auto-correlation and partial auto-correlation are useful in time series ana
 
 * Model selection: Auto-correlation and partial auto-correlation can guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
+## 2. STL Decomopsition 
 # 2. Stationarity
 * Mean and standard-deviation of the timeseries is constant
 * No seasonality
@@ -302,14 +310,21 @@ Bayesian time series modelling incorporates Bayesian statistical methods to mode
 
 # 10. Recurrent Neural Networks
 
+## 11. LSTM 
 ## Read this boo
-https://otexts.com/fpp2/
+https://otexts.com/fpp3/
+Resume for chapter 8 - https://otexts.com/fpp3/expsmooth.html
+
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/steel/steel_homepage/bayesiantsrev.pdf
 State spaxe model
 
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf
+
 https://www.pymc.io/projects/docs/en/stable/learn.html
+https://facebook.github.io/prophet/
 
 ## References
+0. https://otexts.com/fpp3/ 
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 3. https://en.wikipedia.org/wiki/Granger_causality
