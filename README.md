@@ -27,9 +27,10 @@ Steps for pre-processing of time-series data:
 9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
 
 
-## Time Series Characteristics
-
-## 1. Auto-correlation and Partial Auto-correlation
+## 1. Time Series Characteristics
+In addition to  the standard descriptive statistical measures of central tendency (mean, median, mode) and variance, timeseries is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
+ 
+### Auto-correlation and Partial Auto-correlation
 Auto-correlation and partial auto-correlation are statistical measures used in time series analysis to understand the relationship between data points in a sequence.
 
 Auto-correlation measures the similarity between a data point and its lagged versions. In other words, it quantifies the correlation between a data point and the previous data points in the sequence. It helps identify patterns and dependencies in the data over time. Auto-correlation is often visualized using a correlogram, which is a plot of the correlation coefficients against the lag.
@@ -42,7 +43,7 @@ Both auto-correlation and partial auto-correlation are useful in time series ana
 
 * Model selection: Auto-correlation and partial auto-correlation can guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
-## 2. STL Decomopsition 
+
 # 2. Stationarity
 * Mean and standard-deviation of the timeseries is constant
 * No seasonality
@@ -85,6 +86,29 @@ To address the issue of unit roots and non-stationarity, techniques like differe
 
 ## Dickey Fuller Test & Augmented Dickey Fuller Test
 The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series data set is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
+
+
+# 3. Exponential Smoothing
+Exponential smoothing is a time series forecasting technique that applies weighted averages to past observations, giving more weight to recent observations while exponentially decreasing the weight for older observations. This method is useful for making short-term forecasts and smoothing out irregularities in the data.
+
+### Simple Exponential Smoothing:
+
+The forecast for time $t+1$ is calculated as:
+
+$$
+l_{t+1} = \hat{y}_{t+1|t} = \alpha y_t + \alpha (1 - \alpha) y_{t-1} + \alpha (1 - \alpha)^2 y_{t-2} + \alpha (1 - \alpha)^3 y_{t-3} + \cdots 
+$$
+
+$$
+l_{t+1} =  \alpha y_t + (1 - \alpha) l_{t} $$
+
+where:
+
+- $l_{t+1}/\hat{y}_{t+1|t} $ is the forecast for the next time period.
+- $\alpha $ is the smoothing parameter (0 < $\alpha$ < 1).
+- $y_t$ is the actual value at time $t$.
+- $y_{t-1}$ is the actual value at time $t-1$.
+
 
 # 3. ARMA (AutoRegressive Moving Average) Model
 The ARMA model is a popular time series model that combines both autoregressive (AR) and moving average (MA) components. It is used to forecast future values of a time series based on its past values.
