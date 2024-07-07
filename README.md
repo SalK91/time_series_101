@@ -43,8 +43,34 @@ Both auto-correlation and partial auto-correlation are useful in time series ana
 
 * Model selection: Auto-correlation and partial auto-correlation can guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
+### Seasonality
+
+Seasonality refers to regular patterns or fluctuations in a time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
+
+How to address seasonality in time-series models:
+* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns.
+Here's how you can identify a seasonal trend using the ACF:
+
+1. Periodic Peaks: Look for peaks in the ACF plot at regular intervals, corresponding to the seasonal lag. For example, if you're analyzing monthly data and suspect a yearly seasonality, you would expect peaks at lags 12, 24, 36, and so on. Similarly, for quarterly data, peaks would occur at lags 4, 8, 12, and so forth.
+
+2. Significant Peaks: Pay attention to the magnitude of the autocorrelation coefficients at seasonal lags. If the peaks at seasonal lags are significantly higher compared to other lags, it suggests a strong seasonal pattern in the data.
+
+3. Repetitive Patterns: Check for repetitive patterns in the ACF plot that align with the seasonal frequency of the data. Seasonal trends often exhibit periodicity, resulting in a repeating pattern of autocorrelation coefficients at seasonal lags.
+
+4. Alternating Positive and Negative Correlations: In some cases, you may observe alternating positive and negative autocorrelation coefficients at seasonal lags, indicating a seasonal pattern in the data.
+
+5. Partial Autocorrelation Function (PACF): Additionally, you can complement your analysis with the Partial Autocorrelation Function (PACF), which helps identify the direct influence of a lag on the current observation, excluding the indirect effects through shorter lags. Significant spikes in PACF at seasonal lags provide further evidence of seasonality in the data.
+
+By carefully examining the ACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
+
+
+### Cycles
+Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period.
+Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
+In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 # 2. Stationarity
+"A stationary time series is one whose statistical properties do not depend on the time at which the series is observed" [0].
 * Mean and standard-deviation of the timeseries is constant
 * No seasonality
 
@@ -149,33 +175,45 @@ e.g $y_t$ original series
 
 SARIMA stands for Seasonal AutoRegressive Integrated Moving Average model. It is an extension of the ARIMA model that incorporates seasonality into the modeling process. SARIMA models are particularly useful when dealing with time series data that exhibit seasonal patterns.
 
-Seasonality refers to regular patterns or fluctuations in a time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
-
-How to address seasonality in time-series models:
-* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns.
-Here's how you can identify a seasonal trend using the ACF:
-
-1. Periodic Peaks: Look for peaks in the ACF plot at regular intervals, corresponding to the seasonal lag. For example, if you're analyzing monthly data and suspect a yearly seasonality, you would expect peaks at lags 12, 24, 36, and so on. Similarly, for quarterly data, peaks would occur at lags 4, 8, 12, and so forth.
-
-2. Significant Peaks: Pay attention to the magnitude of the autocorrelation coefficients at seasonal lags. If the peaks at seasonal lags are significantly higher compared to other lags, it suggests a strong seasonal pattern in the data.
-
-3. Repetitive Patterns: Check for repetitive patterns in the ACF plot that align with the seasonal frequency of the data. Seasonal trends often exhibit periodicity, resulting in a repeating pattern of autocorrelation coefficients at seasonal lags.
-
-4. Alternating Positive and Negative Correlations: In some cases, you may observe alternating positive and negative autocorrelation coefficients at seasonal lags, indicating a seasonal pattern in the data.
-
-5. Partial Autocorrelation Function (PACF): Additionally, you can complement your analysis with the Partial Autocorrelation Function (PACF), which helps identify the direct influence of a lag on the current observation, excluding the indirect effects through shorter lags. Significant spikes in PACF at seasonal lags provide further evidence of seasonality in the data.
-
-By carefully examining the ACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
-
+### How to address seasonality:
+* Identify seasonal component: Seaonsl component can be identified via ACF/PACF or SLT decomposition.
 * Remove Seasonality: Once the seasonal component has been identified, it needs to be removed from the original data. This can be achieved by differencing the data at seasonal intervals. For example, if the data exhibits monthly seasonality, you can difference the data by subtracting each observation from the observation from the same month in the previous year.
-
 * Fit ARIMA Model: After removing seasonality, fit an ARIMA model to the deseasonalized data. ARIMA models are effective for modeling the remaining non-seasonal components of the time series, including trend and random noise.
 
+### SARMIAX
+The SARIMAX model is defined by the parameters (p, d, q) and (P, D, Q, s):
 
-Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period.
-Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns.
-Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
-In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
+- **(p, d, q)**: These are the non-seasonal parameters.
+  - **p**: The order of the non-seasonal AutoRegressive (AR) part.
+  - **d**: The number of non-seasonal differences needed to make the series stationary.
+  - **q**: The order of the non-seasonal Moving Average (MA) part.
+
+- **(P, D, Q, s)**: These are the seasonal parameters.
+  - **P**: The order of the seasonal AutoRegressive (AR) part.
+  - **D**: The number of seasonal differences needed to make the series stationary.
+  - **Q**: The order of the seasonal Moving Average (MA) part.
+  - **s**: The length of the seasonal cycle (e.g., s=12 for monthly data with yearly seasonality).
+
+- **Exogenous Variables (X)**: These are external variables that can influence the time series but are not part of the series itself. For example, economic indicators or weather data might be included as exogenous variables.
+
+$$
+y_t  = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \cdots + \phi_p y_{t-p} + \\ 
+   \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q} + \\
+   \Phi_1 y_{t-s} + \Phi_2 y_{t-2s} + \cdots + \Phi_P y_{t-Ps} +  \\
+   \Theta_1 \epsilon_{t-s} + \Theta_2 \epsilon_{t-2s} + \cdots + \Theta_Q \epsilon_{t-Qs} + \\
+    \beta_1 x_{1,t} + \beta_2 x_{2,t} + \cdots + \beta_k x_{k,t} + 
+    \epsilon_t
+$$
+
+Where:
+- $y_t$: The value of the time series at time t.
+- $c$: Constant term.
+- $\phi_i$: Parameters for non-seasonal autoregressive terms.
+- $\theta_j$: Parameters for non-seasonal moving average terms.
+- $\epsilon_t$: Error term at time t.
+- $\Phi_i$: Parameters for seasonal autoregressive terms.
+- $\Theta_j$: Parameters for seasonal moving average terms.
+- $\beta_i$: Parameters for the exogenous variables $x_{i,t}$.
 
 
 # 4. ARCH Model
@@ -337,7 +375,7 @@ Bayesian time series modelling incorporates Bayesian statistical methods to mode
 ## 11. LSTM 
 ## Read this boo
 https://otexts.com/fpp3/
-Resume for chapter 8 - https://otexts.com/fpp3/expsmooth.html
+Resume for chapter 10 - https://otexts.com/fpp3/dynamic.html
 
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/steel/steel_homepage/bayesiantsrev.pdf
 State spaxe model
