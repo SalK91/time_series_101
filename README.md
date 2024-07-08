@@ -372,11 +372,11 @@ Bayesian time series modelling incorporates Bayesian statistical methods to mode
 
 # 10. Recurrent Neural Networks
 
+# 11. Prophet Model 
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://lethalletham.com/ForecastingAtScale.pdf
+
 ## 11. LSTM 
 ## Read this boo
-https://otexts.com/fpp3/
-Resume for chapter 10 - https://otexts.com/fpp3/dynamic.html
-
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/steel/steel_homepage/bayesiantsrev.pdf
 State spaxe model
 
