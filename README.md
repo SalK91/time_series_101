@@ -370,28 +370,44 @@ Anomaly detection methods:
 # 9. Bayesian Time Series
 Bayesian time series modelling incorporates Bayesian statistical methods to model and analyze time-dependent data. It leverages prior distributions along with observed data to make inferences about the underlying processes generating the time series. Bayesian methods provide a coherent framework for incorporating prior knowledge and quantifying uncertainty in parameter estimates.
 
-# 10. Recurrent Neural Networks
+# 10. Prophet Model 
+Prophet, developed by Facebook (S. J. Taylor & B. Letham, 2018), is a robust forecasting tool designed initially for predicting daily data with inherent weekly and yearly seasonal patterns, including the effect of holidays. It has since evolved to accommodate a broader range of seasonal data types. [FB paper]
 
-# 11. Prophet Model 
-chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://lethalletham.com/ForecastingAtScale.pdf
+## Model Overview
+Prophet is an additive regression model expressed in the form:
 
-## 11. LSTM 
-## Read this boo
-chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/steel/steel_homepage/bayesiantsrev.pdf
-State spaxe model
+$$y_t = g(t) + s(t) + h(t) + \epsilon_t $$
+
+- $g(t)$: Represents the trend and models the nonlinear trend via a piecewise linear or logistic growth curve.
+- $s(t)$: Models the yearly, weekly, and daily seasonal patterns using Fourier series.
+- $h(t)$: Incorporates the effects of holidays using dummy variables.
+- $\epsilon_t$: Denotes the white noise error term.
+
+The model parameters, including changepoints for the piecewise linear components of the trend and seasonal components, are estimated using a Bayesian approach. This allows for the automatic determination of changepoints and other model characteristics, enhancing the model's flexibility and accuracy.
+
+
+
+# 11. Recurrent Neural Networks
+
+## LSTM 
 
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf
 
 https://www.pymc.io/projects/docs/en/stable/learn.html
 https://facebook.github.io/prophet/
+https://cs.idc.ac.il/~kipnis/teaching.html
 
 ## References
 0. https://otexts.com/fpp3/ 
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 3. https://en.wikipedia.org/wiki/Granger_causality
+4. chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://lethalletham.com/ForecastingAtScale.pdf
 
 
+Next Topic
+Generalized ME
+https://www.youtube.com/watch?v=uBeM1FUk4Ps&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=7
 
 
                                
