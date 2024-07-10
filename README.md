@@ -1,32 +1,13 @@
+A stochastic process $\{..., X_{t-1}, X_t, X_{t+1},...\}$ consisting of random variabled indexed by time index $t$ is a time series [MIT lecture].
+
 Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
+
 
 Time series data are characterized by three key patterns:
 * Trend: This pattern indicates a long-term increase or decrease in the data.
 * Seasonal: A seasonal pattern arises when a time series is influenced by seasonal factors, such as the time of year or day of the week. Seasonality occurs at a fixed and known period.
 * Cyclic: A cyclic pattern appears when the data show rises and falls that do not occur at a fixed frequency. These fluctuations are usually driven by economic conditions and are often linked to the "business cycle," typically lasting at least two years [0].
  
-## 0. Data Preprocessing
-Steps for pre-processing of time-series data:
-
-1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
-
-2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
-
-3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
-
-4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
-
-5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
-
-6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
-
-7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
-
-8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
-
-9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
-
-
 ## 1. Time Series Characteristics
 In addition to  the standard descriptive statistical measures of central tendency (mean, median, mode) and variance, timeseries is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
  
@@ -70,9 +51,23 @@ Cycles are typically longer-term patterns, often spanning several years, and are
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 # 2. Stationarity
-"A stationary time series is one whose statistical properties do not depend on the time at which the series is observed" [0].
-* Mean and standard-deviation of the timeseries is constant
-* No seasonality
+
+## Strict Stationarity:
+
+A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. 
+
+Mathematically ${X_t}$ is strictly stationary:
+$$p(X_{t_1}, X_{t_2}, \ldots, X_{t_k}) = p(X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}) $$
+$$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
+
+[cite MIT lectues]
+
+## Covariance Stationarity (Weak Stationarity):
+A time series ${X_t}$ is covariance stationary (or weakly stationary) if the following conditions hold:
+
+1. The mean $E[X_t]$ is constant for all $t$.
+2. The variance $\text{Var}(X_t) = E[(X_t - E[X_t])^2] $ is finite and constant for all $t$.
+3. The covariance $\text{Cov}(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
 
 How to check for stationary:
 
@@ -113,6 +108,23 @@ To address the issue of unit roots and non-stationarity, techniques like differe
 ## Dickey Fuller Test & Augmented Dickey Fuller Test
 The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series data set is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
 
+## Modelling Univariate Time Series
+
+### Wold Representation Theorem
+The Wold decomposition theorem states that any covariance stationary process can be decomposed into two mutually uncorrelated components. The first component is a linear combination of past values of a white noise process, while the second component consists of a process whose future values can be precisely predicted by a linear function of past observations.
+
+$$ X_t = V_t + S_t$$
+
+where:
+
+- ${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
+- $S_t = \sum_{i=0}^{\infty} \psi_i \eta_{t-i}$ is an infinite moving average process of error terms, where
+  - $\psi_0 = 1, \sum_{i=0}^{\infty} \psi_i^2 < \infty$
+  - $ \eta_t $ is linearly unpredictable white noise, i.e.,
+    $$  E(\eta_t) = 0, \quad E(\eta_t^2) = \sigma^2, \quad E(\eta_t \eta_s) = 0 \ \forall t, \ \forall s \neq t $$
+    and $ \eta_t $ is uncorrelated with $ V_t $: $ E(\eta_t V_s) = 0, \forall \  t, s $
+
+**The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
 
 # 3. Exponential Smoothing
 Exponential smoothing is a time series forecasting technique that applies weighted averages to past observations, giving more weight to recent observations while exponentially decreasing the weight for older observations. This method is useful for making short-term forecasts and smoothing out irregularities in the data.
@@ -160,6 +172,7 @@ where:
 
 The ARMA model is commonly used for time series forecasting and can be estimated using various methods, such as maximum likelihood estimation or least squares estimation.
 
+MLE estimation of 
 
 ## ARIMA Model
  ARIMA includes an integration term, denoted as the "I" in ARIMA, which accounts for non-stationarity in the data. Non-stationarity refers to a situation where the statistical properties of a time series, such as mean and variance, change over time. ARIMA models can handle non-stationary data by differencing the series to achieve stationarity.
@@ -214,6 +227,15 @@ Where:
 - $\Phi_i$: Parameters for seasonal autoregressive terms.
 - $\Theta_j$: Parameters for seasonal moving average terms.
 - $\beta_i$: Parameters for the exogenous variables $x_{i,t}$.
+
+## Modelling Volatality
+
+# Volatality Modelling
+Volatility in the context of time series refers to the degree of variation or dispersion in the series over time. It is a measure of how much the series deviates from its average or expected value. Volatility is particularly relevant in financial markets but can also apply to other types of time series data where variability is important to understand or predict.
+
+Resume from here
+https://www.youtube.com/watch?v=cDlbEQz1PQk&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=8
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/32f868169964ba3cf5015de880cf2172_MIT18_S096F13_lecnote9.pdf
 
 
 # 4. ARCH Model
@@ -336,13 +358,14 @@ where:
 Granger causality does not imply true causality in the philosophical sense; it only indicates predictive causality based on the given data.
 
 # 7. Model Selection
-When analyzing time series data, selecting the appropriate model e.g. AR vs ARMA and model's order is crucial for making accurate predictions. Model selecition methods include:
+When analyzing time series data, selecting the appropriate model (e.g., AR vs ARMA) and determining the model's order is crucial for making accurate predictions. Several methods can be used for model selection:
 
 ###  Akaike Information Criterion  (AIC)
 $$AIC=2k−2ln(L)$$
 where,
 * $k$ - Number of parameters in the model
 * $L$ - Likelihood function for the model
+A lower AIC value indicates a better model.
 
 ### Bayesian Information Criterion (BIC)
 $$BIC=kln(n)−2ln(L)$$
@@ -350,9 +373,23 @@ where,
 * $k$ - Number of parameters in the model.
 * $n$ - Number of data points.
 * $L$ - Likelihood function for the model.
+A lower BIC value indicates a better model.
+
+### Hannan-Quinn Criterian
+$$HQ = 2k \ln(\ln(n)) - 2\ln(L)$$
+
+where:
+- $k$  - Number of parameters in the model
+- $n$ - Number of data points
+- $L$ - Likelihood function for the model
+A lower HQ value indicates a better model.
+
 
 ### Cross Validation
-Divide the time series into training and testing sets. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
+Cross-validation involves dividing the time series into training and testing sets to evaluate the model's performance. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
+
+
+
 
 # 8. Anomaly Detection
 Anomalies refer to data values or events that deviate significantly from the normal trend. Detecting and correcting anomalies is crucial before any analysis of data, as anomalies can lead to incorrect results and conclusions. However, the time dependence and often non-stationary nature of time series data make anomaly detection particularly complex.
@@ -390,6 +427,29 @@ The model parameters, including changepoints for the piecewise linear components
 # 11. Recurrent Neural Networks
 
 ## LSTM 
+
+
+## 0. Data Preprocessing
+Steps for pre-processing of time-series data:
+
+1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
+
+2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
+
+3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
+
+4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
+
+5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
+
+6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
+
+7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
+
+8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
+
+9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
+
 
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf
 
