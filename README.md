@@ -228,17 +228,97 @@ Where:
 - $\Theta_j$: Parameters for seasonal moving average terms.
 - $\beta_i$: Parameters for the exogenous variables $x_{i,t}$.
 
-## Modelling Volatality
 
-# Volatality Modelling
+
+# Modelling Volatility
 Volatility in the context of time series refers to the degree of variation or dispersion in the series over time. It is a measure of how much the series deviates from its average or expected value. Volatility is particularly relevant in financial markets but can also apply to other types of time series data where variability is important to understand or predict.
 
-Resume from here
-https://www.youtube.com/watch?v=cDlbEQz1PQk&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=8
-chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/32f868169964ba3cf5015de880cf2172_MIT18_S096F13_lecnote9.pdf
+
+Volatility in a time series, particularly in the context of finance, is often measured as the annualized standard deviation change in price or value of a financial security  e.g. for asset price voltatilty is computed as follows [MIT Course]
+
+* Given asset Prices at $(T + 1)$ Time Points: 
+$$  \{P_t, t = 0, 1, 2, \ldots, T\}$$
+
+* Asset Returns for $T$ Time Periods is computed as:
+  $$
+  R_t = \log(P_t / P_{t-1}), \quad t = 1, 2, \ldots, T
+  $$
+
+* Assuming Covariance Stationarity of $\{R_t\}$, standard deviation is computed as:
+  $$
+  \sigma = \sqrt{\text{var}(R_t)} = \sqrt{E[(R_t - E[R_t])^2]}
+  $$
+
+  with the sample estimate:
+  $$
+  \hat{\sigma} = \sqrt{\frac{1}{T-1} \sum_{t=1}^T (R_t - \bar{R})^2}, \quad \text{where} \quad \bar{R} = \frac{1}{T} \sum_{t=1}^T R_t
+  $$
+
+* Annualized Volatility:
+  $$
+  \hat{\text{vol}} = 
+  \begin{cases}
+    \sqrt{252} \hat{\sigma} & \text{(daily prices, assuming 252 trading days/year)} \\
+    \sqrt{52} \hat{\sigma} & \text{(weekly prices)} \\
+    \sqrt{12} \hat{\sigma} & \text{(monthly prices)}
+  \end{cases}
+  $$
 
 
-# 4. ARCH Model
+
+## Simple Methods to Model Volatility
+###  Historical Average
+The historical average method estimates the volatility at time step $t+1$ as the mean of past observed variances:
+
+$$
+\tilde{\sigma}^2_{t+1} = \frac{1}{t} \sum_{j=1}^t \hat{\sigma}^2_j
+$$
+
+$\hat{\sigma}^2_j$ represents the squared volatility observed at time $j$.
+
+### Simple Moving Average
+The simple moving average (SMA) estimates volatility at time step $t+1$ by averaging the squared volatilities of the last $m$ data points:
+
+$$
+\tilde{\sigma}^2_{t+1} = \frac{1}{m} \sum_{j=0}^{m-1} \hat{\sigma}^2_{t-j}
+$$
+
+Here, $\hat{\sigma}^2_{t-j}$ represents the squared volatility observed at time $t-j$, and $m$ is the number of data points used in the moving average.
+
+### Exponential Moving Average (EMA)
+The exponential moving average gives more weight to recent observations while exponentially decreasing the weights of older observations. It estimates volatility at time step $t+1$ as:
+
+$$
+\tilde{\sigma}^2_{t+1} = (1 - \beta) \hat{\sigma}^2_t + \beta \tilde{\sigma}^2_t
+$$
+
+Here, $\hat{\sigma}^2_t$ is the squared volatility observed at the current time $t$, $\tilde{\sigma}^2_t$ is the previous estimate of volatility, and $\beta$ is a smoothing factor where $0 \leq \beta \leq 1$.
+
+### Exponential Weighted Moving Average (EWMA)
+
+Similar to EMA, EWMA estimates volatility at time step $t+1$ using an exponentially weighted average of past squared volatilities:
+
+$$
+\tilde{\sigma}^2_{t+1} = \frac{\sum_{j=0}^{m-1} (\beta^j \hat{\sigma}^2_{t-j})}{\sum_{j=0}^{m-1} \beta^j}
+$$
+
+Here, \( \hat{\sigma}^2_{t-j} \) are the squared volatilities observed at previous time steps, \( \beta \) is the smoothing factor, and \( m \) is the number of data points considered in the calculation.
+
+
+### Simple Regression Model
+
+A simple regression model can be employed to predict volatility based on its previous values. For example, a linear regression model might be formulated as:
+
+$$
+\hat{\sigma}^2_{t+1} = \alpha + \beta_1 \hat{\sigma}^2_t + \beta_2 \hat{\sigma}^2_{t-1} + \ldots + \beta_p \hat{\sigma}^2_{t-p+1} + \epsilon_{t+1}
+$$
+
+where $\hat{\sigma}^2_t, \hat{\sigma}^2_{t-1}, \ldots, \hat{\sigma}^2_{t-p}$ are lagged values of volatility up to $p$ periods before time $t$, $\alpha$ is the intercept term, $\beta_1, \beta_2, \ldots, \beta_p$ are coefficients representing the influence of each lagged volatility term, and $\epsilon_{t+1}$ is the error term.
+
+This approach allows capturing the temporal dependency of volatility over previous periods and can be extended to include additional explanatory variables or refine the model complexity based on data characteristics and modeling objectives.
+
+
+## ARCH Model
 ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of models used in econometrics and financial econometrics to analyze time series data, particularly in the context of volatility clustering. These models are designed to capture the time-varying volatility or heteroskedasticity in financial time series data, where the volatility of the series may change over time.
 
 > In statistics, a sequence of random variables is homoscedastic if all its random variables have the same finite variance; this is also known as homogeneity of variance. The complementary notion is called heteroscedasticity, also known as heterogeneity of variance [1]
@@ -246,6 +326,8 @@ ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of model
 The basic idea behind ARCH models is that the variance of a time series can be modeled as a function of its own past values, along with possibly some exogenous variables. In other words, the variance at any given time is conditional on the past observations of the series. 
 
 ### ARCH (1) Model Derivation
+$$y_t = log(P_t/P_{t-1})$$
+
 It posits that the observed value at time t can be decomposed into an average component $\mu$ and a noise term $𝑎(𝑡)$
 
 $$ 𝑦(𝑡)= \mu + 𝑎(𝑡) $$ 
@@ -298,6 +380,8 @@ The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
 The ARCH and GARCH models are crucial in modeling time series data with time-varying volatility. ARCH models capture conditional heteroskedasticity by modeling volatility as a function of past squared errors, while GARCH models extend this to include past volatility terms, providing a more comprehensive framework for volatility modeling.
 
 
+https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=10
+
 # Review - ARMA & GARCH
 * AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
 
@@ -345,7 +429,7 @@ where:
 - $ \mathbf{A}_1 $ is  a 3x1 coefficient matrix.
 - $ \mathbf{\epsilon}_t $ is a  3x1 vector of error terms (white noise).
 
-# 6. Granger Causality
+### Granger Causality
 > The Granger causality test is a statistical hypothesis test for determining whether one time series is useful in forecasting another [3]. It assesses whether past values of one variable $X$ provide statistically significant information about future values of another variable $Y$.
 
 1. The method involves constructing regression models:
