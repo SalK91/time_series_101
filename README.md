@@ -1,17 +1,21 @@
-A stochastic process $\{..., X_{t-1}, X_t, X_{t+1},...\}$ consisting of random variabled indexed by time index $t$ is a time series [MIT lecture].
+#A stochastic process $\{..., X_{t-1}, X_t, X_{t+1},...\}$ consisting of random #variabled indexed by time index $t$ is a time series [MIT lecture]. 
 
 Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
 
+# Application
+
+
+ 
+# 1. Time Series Characteristics
 
 Time series data are characterized by three key patterns:
 * Trend: This pattern indicates a long-term increase or decrease in the data.
 * Seasonal: A seasonal pattern arises when a time series is influenced by seasonal factors, such as the time of year or day of the week. Seasonality occurs at a fixed and known period.
 * Cyclic: A cyclic pattern appears when the data show rises and falls that do not occur at a fixed frequency. These fluctuations are usually driven by economic conditions and are often linked to the "business cycle," typically lasting at least two years [0].
- 
-## 1. Time Series Characteristics
+
 In addition to  the standard descriptive statistical measures of central tendency (mean, median, mode) and variance, timeseries is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
  
-### Auto-correlation and Partial Auto-correlation
+## Auto-correlation and Partial Auto-correlation
 Auto-correlation and partial auto-correlation are statistical measures used in time series analysis to understand the relationship between data points in a sequence.
 
 Auto-correlation measures the similarity between a data point and its lagged versions. In other words, it quantifies the correlation between a data point and the previous data points in the sequence. It helps identify patterns and dependencies in the data over time. Auto-correlation is often visualized using a correlogram, which is a plot of the correlation coefficients against the lag.
@@ -24,7 +28,7 @@ Both auto-correlation and partial auto-correlation are useful in time series ana
 
 * Model selection: Auto-correlation and partial auto-correlation can guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
-### Seasonality
+## Seasonality
 
 Seasonality refers to regular patterns or fluctuations in a time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
 
@@ -45,13 +49,13 @@ Here's how you can identify a seasonal trend using the ACF:
 By carefully examining the ACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
 
 
-### Cycles
+## Cycles
 Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period.
 Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 # 2. Stationarity
-
+What is stationatiy?
 ## Strict Stationarity:
 
 A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. 
@@ -108,7 +112,7 @@ To address the issue of unit roots and non-stationarity, techniques like differe
 ## Dickey Fuller Test & Augmented Dickey Fuller Test
 The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series data set is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
 
-## Modelling Univariate Time Series
+# Modelling Univariate Time Series
 
 ### Wold Representation Theorem
 The Wold decomposition theorem states that any covariance stationary process can be decomposed into two mutually uncorrelated components. The first component is a linear combination of past values of a white noise process, while the second component consists of a process whose future values can be precisely predicted by a linear function of past observations.
@@ -385,6 +389,7 @@ https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnn
 # Review - ARMA & GARCH
 * AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
 
+
 * AR Models: Used when the primary relationship in the data is between the current value and its own past values. Suitable for time series where residuals show no significant autocorrelation pattern, indicating that past values alone sufficiently explain the current observations.
 
 * ARMA Models: Employed when both past values and past forecast errors significantly influence the current value. This combination provides a more comprehensive model for capturing complex dynamics in time series data.
@@ -396,7 +401,89 @@ https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnn
 
 ![ARMA - GARCH Review](images/Figure_ARMA_GARCH_Review.png)
 
-# 5. Vector Autoregression
+# Multivariate Time Series
+A multivariate time series is a collection of multiple time-dependent series of data. Unlike a univariate time series, which consists of a single sequence of observations recorded at regular intervals, a multivariate time series consists of multiple sequences that may be related or interact with each other over time.
+
+$$ \{\mathbf{X}_t \}  =  \ldots, \mathbf{X}_{t-1}, \mathbf{X}_t, \mathbf{X}_{t+1}, \ldots $$ 
+
+represent an $m$-dimensional stochastic process composed of random $m$-vectors:
+
+$$
+\mathbf{X}_t = (X_{1,t}, X_{2,t}, \ldots, X_{m,t})',
+$$
+
+where $\mathbf{X}_t$ is a random vector in $\mathbb{R}^m$. The process $\{ \mathbf{X}_t \}$ consists of $m$ component time series:
+
+$$
+\{ X_{1,t} \}, \{ X_{2,t} \}, \ldots, \{ X_{m,t} \}.
+$$
+
+
+A multivariate time series is considered **covariance stationary** if its statistical properties, such as mean, variance, and covariance, do not change over time. In other words, the process is invariant to time shifts. For multivariate time series, this concept extends to the relationships between multiple time series.
+
+
+1. Constant Mean:
+
+   The mean vector $\mu$ of the time series $\mathbf{X}_t$ is constant over time.
+   $$
+   E[\mathbf{X}_t] = \mu = \begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_m \end{bmatrix} \quad \forall t
+   $$
+
+
+
+3. Constant Covariance:
+
+   The covariance between any pair of component time series $X_{i,t}$ and $X_{j,t}$  is constant over time i.e. the covariance matrix $\Sigma$ of $\mathbf{X}_t$ is constant over time:
+
+   $$
+   \Sigma = E[(\mathbf{X}_t - \mu)(\mathbf{X}_t - \mu)'] = \begin{bmatrix} 
+   \text{var}(X_{1,t}) & \text{cov}(X_{1,t}, X_{2,t}) & \ldots & \text{cov}(X_{1,t}, X_{m,t}) \\
+   \text{cov}(X_{2,t}, X_{1,t})& \text{var}(X_{2,t}) & \ldots & \text{cov}(X_{2,t}, X_{m,t}) \\
+   \vdots & \vdots & \ddots & \vdots \\
+   \text{cov}(X_{m,t}, X_{1,t}) & \text{cov}(X_{m,t}, X_{2,t}) & \ldots & \text{var}(X_{m,t})
+   \end{bmatrix}
+   $$
+
+4. Constant Cross-Covariance:
+
+   The cross-covariance between the component time series at different lags is only a function of the time lag and not of time itself. Formally, the cross-covariance function $ \Gamma_{ij}(k)$ between $X_{i,t}$ and $X_{j,t}$ at lag $k$ is given by:
+   $$
+   \Gamma_{ij}(k) = \text{Cov}(X_{i,t}, X_{j,t+k}) = E[(X_{i,t} - \mu_i)(X_{j,t+k} - \mu_j)]
+   $$
+
+### Multivariate Wold Decomposition Wold Representation Theorem {MIT Tims series II}
+
+Any multivariate covariance stationary time series $\{ \mathbf{X}_t \}$ (where each $\mathbf{X}_t$ is $m$-dimensional) can be decomposed as:
+
+$$
+\mathbf{X}_t = \mathbf{V}_t + \eta_t + \Psi_1 \eta_{t-1} + \Psi_2 \eta_{t-2} + \cdots
+$$
+
+or equivalently,
+
+$$
+\mathbf{X}_t = \mathbf{V}_t + \sum_{k=0}^{\infty} \Psi_k \eta_{t-k}
+$$
+
+where:
+
+- $\{ \mathbf{V}_t \}$ is an $m$-dimensional linearly deterministic process.
+- $\{ \eta_t \}$ is a multivariate white noise process, satisfying:
+  - $E[\eta_t] = \mathbf{0}_m$ (an $m \times 1$ vector)
+  - $\text{Var}[\eta_t] = E[\eta_t \eta_t^T] = \Sigma_\eta$, a positive semi-definite $(m \times m)$ matrix
+  - $\text{Cov}[\eta_t, \eta_{t-k}] = E[\eta_t \eta_{t-k}^T] = \mathbf{0}$ for all $k \neq 0$ (an $m \times m$ matrix)
+  - $\text{Cov}[\eta_t, \mathbf{V}_t] = \mathbf{0}$ for all $k$ (an $m \times m$ matrix)
+
+- The terms $\{ \Psi_k \}$ are $m \times m$ matrices such that:
+  - $\Psi_0 = I_m$ (the $m \times m$ identity matrix)
+  - $\sum_{k=0}^{\infty} \Psi_k \Psi_k^T$ converges.
+
+In summary, the Wold Representation Theorem states that any multivariate covariance stationary time series can be expressed as a sum of a deterministic component and a stochastic component represented by a series of lagged white noise terms.
+
+
+# Modelling multivariate time-series 
+
+## 9. Vector Autoregression
 
 Vector autoregressive models are used for multivariate time series. It is used capture the linear interdependencies among multiple time series. The VAR model generalizes the univariate autoregressive (AR) model by allowing for more than one evolving variable. The structure is that each variable is a linear function of past lags of itself and past lags of the other variables [2].
 
