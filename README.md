@@ -1,21 +1,21 @@
-#A stochastic process $\{..., X_{t-1}, X_t, X_{t+1},...\}$ consisting of random #variabled indexed by time index $t$ is a time series [MIT lecture]. 
+# Practitioner's Guide to Time Series Modelling
 
 Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
 
-# Application
-
+Time series analysis finds application used in various fields such as finance, where it forecast stock prices and economic indicators, and healthcare, where it supervises patient health and monitors disease spread. In manufacturing, it supports process control and anticipatory maintenance, while in the energy sector, it anticipates consumption patterns and manages load balancing. Retail and marketing utilize it for sales prediction and analysis of customer behavior, and in transportation, it assists with traffic control and optimization of the supply chain.
 
  
-# 1. Time Series Characteristics
+## Time Series Characteristics
 
-Time series data are characterized by three key patterns:
-* Trend: This pattern indicates a long-term increase or decrease in the data.
+Time series data are characterized:
+* Trend:  This pattern indicates a long-term increase or decrease in the data.
+
 * Seasonal: A seasonal pattern arises when a time series is influenced by seasonal factors, such as the time of year or day of the week. Seasonality occurs at a fixed and known period.
 * Cyclic: A cyclic pattern appears when the data show rises and falls that do not occur at a fixed frequency. These fluctuations are usually driven by economic conditions and are often linked to the "business cycle," typically lasting at least two years [0].
 
 In addition to  the standard descriptive statistical measures of central tendency (mean, median, mode) and variance, timeseries is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
  
-## Auto-correlation and Partial Auto-correlation
+### Auto-correlation and Partial Auto-correlation
 Auto-correlation and partial auto-correlation are statistical measures used in time series analysis to understand the relationship between data points in a sequence.
 
 Auto-correlation measures the similarity between a data point and its lagged versions. In other words, it quantifies the correlation between a data point and the previous data points in the sequence. It helps identify patterns and dependencies in the data over time. Auto-correlation is often visualized using a correlogram, which is a plot of the correlation coefficients against the lag.
@@ -54,9 +54,12 @@ Cycles, on the other hand, refer to fluctuations in a time series that are not o
 Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
-# 2. Stationarity
-What is stationatiy?
-## Strict Stationarity:
+## Stationarity
+Stationarity in time series data implies that statistical characteristics, such as mean, variance, and covariance, remain consistent over time. This stability is crucial for various time-series modeling techniques as it simplifies the underlying dynamics, facilitating accurate analysis, modeling, and forecasting.
+
+There are two primary types of stationarity in time-series:
+
+### Strict Stationarity:
 
 A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. 
 
@@ -66,37 +69,20 @@ $$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
 
 [cite MIT lectues]
 
-## Covariance Stationarity (Weak Stationarity):
+### Covariance Stationarity (Weak Stationarity):
 A time series ${X_t}$ is covariance stationary (or weakly stationary) if the following conditions hold:
 
 1. The mean $E[X_t]$ is constant for all $t$.
 2. The variance $\text{Var}(X_t) = E[(X_t - E[X_t])^2] $ is finite and constant for all $t$.
 3. The covariance $\text{Cov}(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
 
-How to check for stationary:
 
-    1. Visually
-    2. Global vs Local Test
-    3. Augmented Dickey Fuller Test
-    
-How to make Time Series Stationary if it is not stationary?
-* Differencing:  e.g First-order Differencing: Subtract the previous observation from the current observation. If the time series has seasonality, seasonal differencing can be applied.
-* Transformations: Transformations like logarithm, square root, or Box-Cox can stabilize the variance.
-* Decomposition: Decompose the time series into trend, seasonal, and residual components.
-* Detrending e.g. Subtracting the Rolling Mean or Fitting and Removing a Linear Trend.
-
-
-
-## White Noise
-* Mean =0
-* St. Dev is constant w.r.t  to time
-* Correlation between lags is 0
-
-## Unit Roots
- Unit root is a feature of some stochastic processes (random processes). This stochastic process is a time series model where a single shock can have a persistent effect. This means that the impact of a single, random event can continue to influence the process indefinitely.The concept is closely tied to the idea of stationarity in a time series. A time series is said to be stationary if its statistical properties do not change over time. However, a time series with a unit root is non-stationary, as its mean and variance can change over time.
+### Unit Roots
+ Unit root is a feature of a time series where a single shock can have a persistent effect. This means that the impact of a single, random event can continue to influence the process indefinitely.The concept is closely tied to the idea of stationarity in a time series. A time series is said to be stationary if its statistical properties do not change over time. However, a time series with a unit root is non-stationary, as its mean and variance can change over time.
 
 Unit roots are a problem in time series analysis because they can lead to non-stationarity. A unit root is a root of the characteristic equation of a time series model that is equal to 1. When a time series has a unit root, it means that the series is not stationary and its statistical properties, such as mean and variance, are not constant over time.
 
+### Why is stationarity important?
 Non-stationary time series can be problematic for several reasons:
 
 1. Difficulty in modeling: Non-stationary time series violate the assumptions of many statistical models, making it challenging to accurately model and forecast future values. Models like ARIMA (AutoRegressive Integrated Moving Average) assume stationarity, so non-stationary data can lead to unreliable predictions.
@@ -109,10 +95,19 @@ To address the issue of unit roots and non-stationarity, techniques like differe
 
 **It is important to identify and address unit roots in time series analysis to ensure reliable and accurate modeling and forecasting.**
 
-## Dickey Fuller Test & Augmented Dickey Fuller Test
+
+### Dickey Fuller Test & Augmented Dickey Fuller Test
 The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series data set is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
 
-# Modelling Univariate Time Series
+
+### How to make Time Series Stationary if it is not stationary?
+* Differencing:  e.g First-order Differencing: Subtract the previous observation from the current observation. If the time series has seasonality, seasonal differencing can be applied.
+* Transformations: Transformations like logarithm, square root, or Box-Cox can stabilize the variance.
+* Decomposition: Decompose the time series into trend, seasonal, and residual components.
+* Detrending e.g. Subtracting the Rolling Mean or Fitting and Removing a Linear Trend.
+
+
+## Modelling Univariate Time Series
 
 ### Wold Representation Theorem
 The Wold decomposition theorem states that any covariance stationary process can be decomposed into two mutually uncorrelated components. The first component is a linear combination of past values of a white noise process, while the second component consists of a process whose future values can be precisely predicted by a linear function of past observations.
@@ -130,10 +125,10 @@ where:
 
 **The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
 
-# 3. Exponential Smoothing
+### Exponential Smoothing
 Exponential smoothing is a time series forecasting technique that applies weighted averages to past observations, giving more weight to recent observations while exponentially decreasing the weight for older observations. This method is useful for making short-term forecasts and smoothing out irregularities in the data.
 
-### Simple Exponential Smoothing:
+#### Simple Exponential Smoothing:
 
 The forecast for time $t+1$ is calculated as:
 
@@ -152,7 +147,7 @@ where:
 - $y_{t-1}$ is the actual value at time $t-1$.
 
 
-# 3. ARMA (AutoRegressive Moving Average) Model
+### 3. ARMA (AutoRegressive Moving Average) Model
 The ARMA model is a popular time series model that combines both autoregressive (AR) and moving average (MA) components. It is used to forecast future values of a time series based on its past values.
 
 The autoregressive (AR) component of the ARMA model represents the linear relationship between the current observation and a certain number of lagged observations. It assumes that the current value of the time series is a linear combination of its past values. The order of the autoregressive component, denoted by p, determines the number of lagged observations included in the model.
@@ -178,7 +173,7 @@ The ARMA model is commonly used for time series forecasting and can be estimated
 
 MLE estimation of 
 
-## ARIMA Model
+#### ARIMA Model
  ARIMA includes an integration term, denoted as the "I" in ARIMA, which accounts for non-stationarity in the data. Non-stationarity refers to a situation where the statistical properties of a time series, such as mean and variance, change over time. ARIMA models can handle non-stationary data by differencing the series to achieve stationarity.
 
 In ARIMA models, the integration order (denoted as "d") specifies how many times differencing is required to achieve stationarity. This is a parameter that needs to be determined or estimated from the data. ARMA models do not involve this integration order parameter since they assume stationary data.
@@ -188,16 +183,16 @@ e.g $y_t$ original series
 * First Order ARIMA will be: $z_t = y_{t+1} - y_t$
 * Second Order ARIMA will be: $k_t = z_{t+1} - z_t$
 
-## SARIMA
+#### SARIMA
 
 SARIMA stands for Seasonal AutoRegressive Integrated Moving Average model. It is an extension of the ARIMA model that incorporates seasonality into the modeling process. SARIMA models are particularly useful when dealing with time series data that exhibit seasonal patterns.
 
-### How to address seasonality:
+#### How to address seasonality:
 * Identify seasonal component: Seaonsl component can be identified via ACF/PACF or SLT decomposition.
 * Remove Seasonality: Once the seasonal component has been identified, it needs to be removed from the original data. This can be achieved by differencing the data at seasonal intervals. For example, if the data exhibits monthly seasonality, you can difference the data by subtracting each observation from the observation from the same month in the previous year.
 * Fit ARIMA Model: After removing seasonality, fit an ARIMA model to the deseasonalized data. ARIMA models are effective for modeling the remaining non-seasonal components of the time series, including trend and random noise.
 
-### SARMIAX
+#### SARMIAX
 The SARIMAX model is defined by the parameters (p, d, q) and (P, D, Q, s):
 
 - **(p, d, q)**: These are the non-seasonal parameters.
@@ -234,7 +229,7 @@ Where:
 
 
 
-# Modelling Volatility
+## Modelling Volatility
 Volatility in the context of time series refers to the degree of variation or dispersion in the series over time. It is a measure of how much the series deviates from its average or expected value. Volatility is particularly relevant in financial markets but can also apply to other types of time series data where variability is important to understand or predict.
 
 
@@ -270,8 +265,8 @@ $$  \{P_t, t = 0, 1, 2, \ldots, T\}$$
 
 
 
-## Simple Methods to Model Volatility
-###  Historical Average
+### Simple Methods to Model Volatility
+####  Historical Average
 The historical average method estimates the volatility at time step $t+1$ as the mean of past observed variances:
 
 $$
@@ -280,7 +275,7 @@ $$
 
 $\hat{\sigma}^2_j$ represents the squared volatility observed at time $j$.
 
-### Simple Moving Average
+#### Simple Moving Average
 The simple moving average (SMA) estimates volatility at time step $t+1$ by averaging the squared volatilities of the last $m$ data points:
 
 $$
@@ -289,7 +284,7 @@ $$
 
 Here, $\hat{\sigma}^2_{t-j}$ represents the squared volatility observed at time $t-j$, and $m$ is the number of data points used in the moving average.
 
-### Exponential Moving Average (EMA)
+#### Exponential Moving Average (EMA)
 The exponential moving average gives more weight to recent observations while exponentially decreasing the weights of older observations. It estimates volatility at time step $t+1$ as:
 
 $$
@@ -298,7 +293,7 @@ $$
 
 Here, $\hat{\sigma}^2_t$ is the squared volatility observed at the current time $t$, $\tilde{\sigma}^2_t$ is the previous estimate of volatility, and $\beta$ is a smoothing factor where $0 \leq \beta \leq 1$.
 
-### Exponential Weighted Moving Average (EWMA)
+#### Exponential Weighted Moving Average (EWMA)
 
 Similar to EMA, EWMA estimates volatility at time step $t+1$ using an exponentially weighted average of past squared volatilities:
 
@@ -309,7 +304,7 @@ $$
 Here, \( \hat{\sigma}^2_{t-j} \) are the squared volatilities observed at previous time steps, \( \beta \) is the smoothing factor, and \( m \) is the number of data points considered in the calculation.
 
 
-### Simple Regression Model
+#### Simple Regression Model
 
 A simple regression model can be employed to predict volatility based on its previous values. For example, a linear regression model might be formulated as:
 
@@ -322,14 +317,14 @@ where $\hat{\sigma}^2_t, \hat{\sigma}^2_{t-1}, \ldots, \hat{\sigma}^2_{t-p}$ are
 This approach allows capturing the temporal dependency of volatility over previous periods and can be extended to include additional explanatory variables or refine the model complexity based on data characteristics and modeling objectives.
 
 
-## ARCH Model
+### ARCH Model
 ARCH (Autoregressive Conditional Heteroskedasticity) models are a class of models used in econometrics and financial econometrics to analyze time series data, particularly in the context of volatility clustering. These models are designed to capture the time-varying volatility or heteroskedasticity in financial time series data, where the volatility of the series may change over time.
 
 > In statistics, a sequence of random variables is homoscedastic if all its random variables have the same finite variance; this is also known as homogeneity of variance. The complementary notion is called heteroscedasticity, also known as heterogeneity of variance [1]
 
 The basic idea behind ARCH models is that the variance of a time series can be modeled as a function of its own past values, along with possibly some exogenous variables. In other words, the variance at any given time is conditional on the past observations of the series. 
 
-### ARCH (1) Model Derivation
+#### ARCH (1) Model Derivation
 $$y_t = log(P_t/P_{t-1})$$
 
 It posits that the observed value at time t can be decomposed into an average component $\mu$ and a noise term $𝑎(𝑡)$
@@ -347,7 +342,7 @@ $$\sigma(t) = \sqrt{\alpha_0 + \alpha_1 * a^2 _{t-1}}$$
  
 Where $\alpha_0, \alpha_1$ are the parameters of the model and $𝑎_{𝑡−1}$ is the volatility at the last timestep.
 
-### ARCH (p) Model
+#### ARCH (p) Model
 The ARCH(1) model can be generalized to an ARCH(p) model, where the volatility term depends on the past $p$ values of the noise term $a(t)$:
 
 $$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} + \ldots + \alpha_p a^2_{t-p} $$
@@ -374,7 +369,7 @@ The final formulation of the ARCH(p) model is:
 
 To estimate the parameters, one typically uses maximum likelihood estimation (MLE) or other estimation techniques. Once the parameters are estimated, the model can be used to forecast the conditional variance of the time series into the future.
 
-## GARCH Model
+### GARCH Model
 GARCH model is extenstion of ARCH Model. It models time series as a function of previous states value as well volatality. GARCH compared to ARCH takes volatality of time-series into account.
 
 The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
@@ -386,7 +381,7 @@ The ARCH and GARCH models are crucial in modeling time series data with time-var
 
 https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=10
 
-# Review - ARMA & GARCH
+## Review - ARMA & GARCH
 * AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
 
 
@@ -401,7 +396,7 @@ https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnn
 
 ![ARMA - GARCH Review](images/Figure_ARMA_GARCH_Review.png)
 
-# Multivariate Time Series
+## Multivariate Time Series
 A multivariate time series is a collection of multiple time-dependent series of data. Unlike a univariate time series, which consists of a single sequence of observations recorded at regular intervals, a multivariate time series consists of multiple sequences that may be related or interact with each other over time.
 
 $$ \{\mathbf{X}_t \}  =  \ldots, \mathbf{X}_{t-1}, \mathbf{X}_t, \mathbf{X}_{t+1}, \ldots $$ 
@@ -481,14 +476,14 @@ where:
 In summary, the Wold Representation Theorem states that any multivariate covariance stationary time series can be expressed as a sum of a deterministic component and a stochastic component represented by a series of lagged white noise terms.
 
 
-# Modelling multivariate time-series 
+## Modelling multivariate time-series 
 
-## 9. Vector Autoregression
+### 9. Vector Autoregression
 
 Vector autoregressive models are used for multivariate time series. It is used capture the linear interdependencies among multiple time series. The VAR model generalizes the univariate autoregressive (AR) model by allowing for more than one evolving variable. The structure is that each variable is a linear function of past lags of itself and past lags of the other variables [2].
 
 
-### Three-Variable VAR(1) Model
+#### Three-Variable VAR(1) Model
 
 Consider a three-variable time series $ \mathbf{y}_t = (y_{1t}, y_{2t}, y_{3t})' $. The VAR(1) model for this time series can be written as:
 
@@ -562,7 +557,29 @@ Cross-validation involves dividing the time series into training and testing set
 
 
 
-# 8. Anomaly Detection
+## Data Preprocessing
+Steps for pre-processing of time-series data:
+
+1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
+
+2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
+
+3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
+
+4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
+
+5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
+
+6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
+
+7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
+
+8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
+
+9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
+
+
+## Anomaly Detection
 Anomalies refer to data values or events that deviate significantly from the normal trend. Detecting and correcting anomalies is crucial before any analysis of data, as anomalies can lead to incorrect results and conclusions. However, the time dependence and often non-stationary nature of time series data make anomaly detection particularly complex.
 
 Anomaly detection methods:
@@ -574,6 +591,95 @@ Anomaly detection methods:
 5. Kmeans clustering - unsupervised clustering can help identify anomalies.
 6. STL decomposition - “Seasonal and Trend decomposition using Loess”  decomposes time series into it seasonal, trend, and residue components. Residue component can be used to identify anomalies.
 7. Detection using Forecasting -  In forecasting we predict each point based on past data points using a forecasting method such as ARMA model. The deviation of actual value from the prediction can be used to identify anomalies.
+
+-----------------------------------------
+## Linear State Space Representation
+"State-space models are models that use state variables to describe a system by a set of first-order differential or difference equations, rather than by one or more nth-order differential or difference equations. If the set of first-order differential equation is linear in the state and input variables, the model is referred to as a linear state space model. [5 matlab]"
+
+### State Space Formulation [MIT TimeSeries III]
+
+- $ \mathbf{y}_t $: ($ k \times 1 $) observation vector at time $ t $
+- $ \mathbf{s}_t $: ($ m \times 1 $) state vector at time $ t $
+- $ \mathbf{\epsilon}_t $: ($ k \times 1 $) observation error vector at time $ t $
+- $ \mathbf{\eta}_t $: ($ n \times 1 $) state transition innovation/error vector
+
+#### State Equation
+
+$$
+\mathbf{s}_{t+1} = \mathbf{T}_t \mathbf{s}_t + \mathbf{R}_t \mathbf{\eta}_t
+$$
+
+where:
+- $ \mathbf{T}_t $: ($ m \times m $) transition coefficients matrix
+- $ \mathbf{R}_t $: ($ m \times n $) fixed matrix, often consisting of column(s) of $ I_p $
+- $ \mathbf{\eta}_t $: i.i.d. $ N(\mathbf{0}_n, \mathbf{Q}_t) $, where $ \mathbf{Q}_t $ ($ n \times n $) is positive definite
+
+#### Observation Equation Equation
+
+$$
+y_t = Z_t s_t + \epsilon_t
+$$
+
+where
+- $ Z_t $: ($ k \times m $) observation coefficients matrix
+- $ \epsilon_t $: i.i.d. $ N(0_k, H_t) $, where $ H_t $ ($ k \times k $) is positive definite.
+
+#### Joint Equation
+
+$$
+\begin{bmatrix}
+s_{t+1} \\
+y_t
+\end{bmatrix}
+=
+\begin{bmatrix}
+T_t \\
+Z_t
+\end{bmatrix}
+s_t
++
+\begin{bmatrix}
+R_t \eta_t \\
+\epsilon_t
+\end{bmatrix}
+=
+\Phi_t s_t + u_t,
+$$
+
+where
+$$
+u_t =
+\begin{bmatrix}
+R_t \eta_t \\
+\epsilon_t
+\end{bmatrix}
+\sim N(0, \Omega), \text{ with } \Omega =
+\begin{bmatrix}
+R_t Q_t R_t^T & 0 \\
+0 & H_t
+\end{bmatrix}
+$$
+
+**Note**: Often the model is time-invariant ($ T_t, R_t, Z_t, Q_t, H_t $ constants).
+
+### Kalman Filter
+The Kalman Filter is the recursive algoirthm to estimate the state of a system from a series of noisy measurements over time. It operates in two main phases:
+
+https://www.kalmanfilter.net/background.html
+
+https://www.udacity.com/course/time-series-forecasting--ud980
+
+https://github.com/MaxBenChrist/awesome_time_series_in_python
+
+
+https://www.youtube.com/watch?v=v5ijNXvlC5A
+
+https://www.kevinkotze.org/time-series-analysis
+
+
+
+
+# Linear State-space model 
 
 # 9. Bayesian Time Series
 Bayesian time series modelling incorporates Bayesian statistical methods to model and analyze time-dependent data. It leverages prior distributions along with observed data to make inferences about the underlying processes generating the time series. Bayesian methods provide a coherent framework for incorporating prior knowledge and quantifying uncertainty in parameter estimates.
@@ -600,27 +706,6 @@ The model parameters, including changepoints for the piecewise linear components
 ## LSTM 
 
 
-## 0. Data Preprocessing
-Steps for pre-processing of time-series data:
-
-1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
-
-2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
-
-3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
-
-4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
-
-5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
-
-6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
-
-7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
-
-8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
-
-9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
-
 
 chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/stl-a-seasonal-trend-decomposition-procedure-based-on-loess.pdf
 
@@ -634,6 +719,7 @@ https://cs.idc.ac.il/~kipnis/teaching.html
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 3. https://en.wikipedia.org/wiki/Granger_causality
 4. chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://lethalletham.com/ForecastingAtScale.pdf
+5. https://uk.mathworks.com/help/ident/ug/what-are-state-space-models.html
 
 
 Next Topic
