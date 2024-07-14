@@ -92,7 +92,7 @@ A time series ${X_t}$ is covariance stationary (or weakly stationary) if the fol
 
 1. The mean $E[X_t]$ is constant for all $t$.
 2. The variance ${Var}(X_t) = E[(X_t - E[X_t])^2]$ is finite and constant for all $t$.
-3. The covariance ${Cov}(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
+3. The covariance $Cov(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
 
 
 ### Unit Roots
