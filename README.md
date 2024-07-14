@@ -1,57 +1,82 @@
-# Practitioner's Guide to Time Series Modelling - I
+# Practitioner's Guide to Time Series Modelling - I (Classical Time Series Analysis)
 
-Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
+Time series data represents a sequence of data points collected over time. Unlike other data types, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
 
-Time series analysis finds application used in various fields such as finance, where it forecast stock prices and economic indicators, and healthcare, where it supervises patient health and monitors disease spread. In manufacturing, it supports process control and anticipatory maintenance, while in the energy sector, it anticipates consumption patterns and manages load balancing. Retail and marketing utilize it for sales prediction and analysis of customer behavior, and in transportation, it assists with traffic control and optimization of the supply chain.
+## Applications of Time Series Modeling
 
- 
+Time series modelling has a wide range of applications across various fields including:
+
+- **Stock Market Analysis and Forecasting**: Predicting future stock prices, volatility, and market trends.
+- **Economic Indicators**: Forecasting GDP, inflation, and unemployment rates.
+- **Risk Management**: Assessing and managing financial risk through Value at Risk (VaR) models.
+- **Weather Forecasting**: Predicting short-term weather conditions such as temperature and precipitation.
+- **Climate Modeling**: Analyzing long-term climate patterns and predicting climate change impacts.
+- **Epidemiology**: Tracking and predicting the spread of diseases.
+- **Patient Monitoring**: Analyzing vital signs and predicting health events such as heart attacks.
+- **Demand Forecasting**: Predicting electricity and gas consumption to optimize production and distribution.
+- **Renewable Energy Production**: Forecasting solar and wind power generation based on weather conditions.
+- **Sales Forecasting**: Predicting future sales to manage inventory and supply chains effectively.
+- **Customer Behavior Analysis**: Understanding and predicting customer purchasing patterns.
+- **Predictive Maintenance**: Forecasting equipment failures to perform maintenance before breakdowns occur.
+- **Quality Control**: Monitoring production processes to detect anomalies and maintain product quality.
+- **Traffic Forecasting**: Predicting traffic flow and congestion to improve urban planning and reduce travel time.
+- **Supply Chain Optimization**: Forecasting demand to optimize logistics and reduce costs.
+- **Air Quality Monitoring**: Predicting pollution levels and assessing environmental health.
+- **Water Resource Management**: Analyzing and predicting water levels and flow in rivers and reservoirs.
+
 ## Time Series Characteristics
 
-Time series data are characterized:
-* Trend:  This pattern indicates a long-term increase or decrease in the data.
+Time series data are characterized by:
 
-* Seasonal: A seasonal pattern arises when a time series is influenced by seasonal factors, such as the time of year or day of the week. Seasonality occurs at a fixed and known period.
-* Cyclic: A cyclic pattern appears when the data show rises and falls that do not occur at a fixed frequency. These fluctuations are usually driven by economic conditions and are often linked to the "business cycle," typically lasting at least two years [0].
+- **Trend**: A long-term increase or decrease in the data.
+- **Seasonality**: Influences from seasonal factors, such as the time of year or day of the week, occurring at fixed and known periods.
+- **Cyclic Patterns**: Rises and falls that do not occur at a fixed frequency, usually driven by economic conditions and often linked to the "business cycle," typically lasting at least two years.
 
-In addition to  the standard descriptive statistical measures of central tendency (mean, median, mode) and variance, timeseries is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
- 
+
+![Time Series Data](images/airline_timeseries.png)
+
+
+In addition to standard descriptive statistical measures of central tendency (mean, median, mode) and variance, time series is defined by its temporal dependence. Temporal dependence is measured through auto-correlation and partial auto-correlation, which help identify the relationships between data points over time and are essential for understanding patterns and making accurate forecasts.
+
 ### Auto-correlation and Partial Auto-correlation
+
 Auto-correlation and partial auto-correlation are statistical measures used in time series analysis to understand the relationship between data points in a sequence.
 
-Auto-correlation measures the similarity between a data point and its lagged versions. In other words, it quantifies the correlation between a data point and the previous data points in the sequence. It helps identify patterns and dependencies in the data over time. Auto-correlation is often visualized using a correlogram, which is a plot of the correlation coefficients against the lag.
-
-Partial auto-correlation, on the other hand, measures the correlation between a data point and its lagged versions while controlling for the influence of intermediate data points. It helps identify the direct relationship between a data point and its lagged versions, excluding the indirect relationships mediated by other data points. Partial auto-correlation is also visualized using a correlogram.
+- **Auto-correlation** measures the similarity between a data point and its lagged versions. It quantifies the correlation between a data point and previous data points in the sequence. Auto-correlation helps identify patterns and dependencies in the data over time and is often visualized using a correlogram, a plot of the correlation coefficients against the lag.
+  
+- **Partial Auto-correlation** measures the correlation between a data point and its lagged versions while controlling for the influence of intermediate data points. It identifies the direct relationship between a data point and its lagged versions, excluding the indirect relationships mediated by other data points. Partial auto-correlation is also visualized using a correlogram.
 
 Both auto-correlation and partial auto-correlation are useful in time series analysis for several reasons:
 
-* Identifying seasonality: Auto-correlation can help detect repeating patterns or seasonality in the data. If there is a significant correlation at a specific lag, it suggests that the data exhibits a repeating pattern at that interval.
+- **Identifying Seasonality**: Auto-correlation can help detect repeating patterns or seasonality in the data. Significant correlation at a specific lag suggests the data exhibits a repeating pattern at that interval.
+- **Model Selection**: Auto-correlation and partial auto-correlation guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
-* Model selection: Auto-correlation and partial auto-correlation can guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
+![ACF & PACF Correlogram](images/pacf_acf.png)
+The plots above show ACF and PACF Correlograms for the air line passenger data.
+* The ACF shows high values for the first few lags, gradually decreasing but still remaining significant for many lags. This indicates a strong autocorrelation in the data, suggesting that past values have a strong influence on future values.
+* For PACF there are significant peaks occur at lags 12, 24, etc., this suggests yearly seasonality effect in data.
 
 ## Seasonality
+Seasonality refers to the regular patterns or fluctuations in time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
 
-Seasonality refers to regular patterns or fluctuations in a time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
+How to identify seasonality in time-series models:
 
-How to address seasonality in time-series models:
-* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns.
-Here's how you can identify a seasonal trend using the ACF:
+* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns. Here's how you can identify a seasonal trend using the ACF:
 
-1. Periodic Peaks: Look for peaks in the ACF plot at regular intervals, corresponding to the seasonal lag. For example, if you're analyzing monthly data and suspect a yearly seasonality, you would expect peaks at lags 12, 24, 36, and so on. Similarly, for quarterly data, peaks would occur at lags 4, 8, 12, and so forth.
+* Periodic Peaks: Look for peaks in the ACF plot at regular intervals, corresponding to the seasonal lag. For example, if you're analyzing monthly data and suspect a yearly seasonality, you would expect peaks at lags 12, 24, 36, and so on. Similarly, for quarterly data, peaks would occur at lags 4, 8, 12, and so forth.
 
-2. Significant Peaks: Pay attention to the magnitude of the autocorrelation coefficients at seasonal lags. If the peaks at seasonal lags are significantly higher compared to other lags, it suggests a strong seasonal pattern in the data.
+* Significant Peaks: Pay attention to the magnitude of the autocorrelation coefficients at seasonal lags. If the peaks at seasonal lags are significantly higher compared to other lags, it suggests a strong seasonal pattern in the data.
 
-3. Repetitive Patterns: Check for repetitive patterns in the ACF plot that align with the seasonal frequency of the data. Seasonal trends often exhibit periodicity, resulting in a repeating pattern of autocorrelation coefficients at seasonal lags.
+* Repetitive Patterns: Check for repetitive patterns in the ACF plot that align with the seasonal frequency of the data. Seasonal trends often exhibit periodicity, resulting in a repeating pattern of autocorrelation coefficients at seasonal lags.
+Alternating Positive and Negative Correlations: In somae cases, you may observe alternating positive and negative autocorrelation coefficients at seasonal lags, indicating a seasonal pattern in the data.
 
-4. Alternating Positive and Negative Correlations: In some cases, you may observe alternating positive and negative autocorrelation coefficients at seasonal lags, indicating a seasonal pattern in the data.
+* Partial Autocorrelation Function (PACF): Additionally, you can complement your analysis with the Partial Autocorrelation Function (PACF), which helps identify the direct influence of a lag on the current observation, excluding the indirect effects through shorter lags. Significant spikes in PACF at seasonal lags provide further evidence of seasonality in the data.
 
-5. Partial Autocorrelation Function (PACF): Additionally, you can complement your analysis with the Partial Autocorrelation Function (PACF), which helps identify the direct influence of a lag on the current observation, excluding the indirect effects through shorter lags. Significant spikes in PACF at seasonal lags provide further evidence of seasonality in the data.
-
-By carefully examining the ACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
-
+By carefully examining the ACF/PACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
 
 ## Cycles
-Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period.
-Cycles are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
+Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period. They are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
+
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 ## Stationarity
@@ -378,8 +403,7 @@ The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
 
 The ARCH and GARCH models are crucial in modeling time series data with time-varying volatility. ARCH models capture conditional heteroskedasticity by modeling volatility as a function of past squared errors, while GARCH models extend this to include past volatility terms, providing a more comprehensive framework for volatility modeling.
 
-
-https://www.youtube.com/watch?v=_IFUfFuyQlU&list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR&index=10
+ 
 
 ## Review - ARMA & GARCH
 * AR/ARMA Models: Best suited for stationary time series data, where statistical properties like mean and variance are constant over time. Useful for short-term forecasting, ARMA models combine both autoregressive (AR) and moving average (MA) components to capture the dynamics influenced by past values and past forecast errors.
@@ -554,43 +578,14 @@ A lower HQ value indicates a better model.
 ### Cross Validation
 Cross-validation involves dividing the time series into training and testing sets to evaluate the model's performance. A common method is time series cross-validation, where the data is split into multiple training and validation sets in a rolling or expanding window manner. Use metrics such as Mean Squared Error (MSE) or Mean Absolute Error (MAE) to evaluate performance to choose the best model.
 
+https://www.youtube.com/playlist?list=PLRRxOfxVBikdM1SbWQlCd8ENfN8ZuJ_js
+https://github.com/AileenNielsen/TimeSeriesAnalysisWithPython
 
 
 
-## Data Preprocessing
-Steps for pre-processing of time-series data:
 
-1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
-
-2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
-
-3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
-
-4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
-
-5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
-
-6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
-
-7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
-
-8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
-
-9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
-
-
-## Anomaly Detection
-Anomalies refer to data values or events that deviate significantly from the normal trend. Detecting and correcting anomalies is crucial before any analysis of data, as anomalies can lead to incorrect results and conclusions. However, the time dependence and often non-stationary nature of time series data make anomaly detection particularly complex.
-
-Anomaly detection methods:
-
-1. Z-Score Method - calculates the standard score of each data point to identify anomalies.
-2. Moving Average with Standard Deviation -  deviation of the point from the rolling moving average and standard deviation.
-3. Isolation Forest - an ensemble method designed for anomaly detection.
-4. One-Class SVM - One-Class Support Vector Machines can be used for anomaly detection.
-5. Kmeans clustering - unsupervised clustering can help identify anomalies.
-6. STL decomposition - “Seasonal and Trend decomposition using Loess”  decomposes time series into it seasonal, trend, and residue components. Residue component can be used to identify anomalies.
-7. Detection using Forecasting -  In forecasting we predict each point based on past data points using a forecasting method such as ARMA model. The deviation of actual value from the prediction can be used to identify anomalies.
+#########################
+# Practitioner's Guide to Time Series Modelling - III | Model Time Series Analaysis
 
 -----------------------------------------
 ## Linear State Space Representation
@@ -712,6 +707,48 @@ chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.scb.se/contentas
 https://www.pymc.io/projects/docs/en/stable/learn.html
 https://facebook.github.io/prophet/
 https://cs.idc.ac.il/~kipnis/teaching.html
+
+
+
+
+# Practitioner's Guide to Time Series Modelling - II | EDA, Data Processing
+
+## Data Preprocessing
+Steps for pre-processing of time-series data:
+
+1. Normalization - Normalize the data so the mean of the time-series is 0 and the standard deviation is 1. This can be achieved by subtracting the mean and dividing by the standard deviation of the time-series.
+
+2. Remove Trend - Remove the trend by taking the first difference of the time-series. This helps to stabilize the mean of the time-series and remove long-term trends.
+
+3. Remove Changing Volatility - If the data exhibits changing volatility, this can be addressed by computing the yearly standard deviation and dividing each data point by the corresponding year's standard deviation. This step helps to stabilize the variance of the time-series.
+
+4. Remove Seasonal Effect - Compute the mean for all months across all years and subtract the data point by its month's average. This helps in removing any seasonal patterns that might be present in the data.
+
+5. Handle Missing Values - Identify and handle any missing values in the time-series. Common methods include interpolation, forward filling, or using statistical methods to estimate and fill in the missing data.
+
+6. Outlier Detection and Treatment - Detect and treat any outliers in the data, which might skew the results. Outliers can be treated by capping, flooring, or using more advanced statistical methods to adjust their impact.
+
+7. Stationarity Check - Ensure the time-series is stationary, meaning its statistical properties like mean, variance, and autocorrelation are constant over time. Use techniques such as the Augmented Dickey-Fuller (ADF) test to check for stationarity. If the series is not stationary, further transformations such as differencing or logarithmic transformations might be necessary.
+
+8. Lagged Features Creation - Create lagged features to capture the temporal dependencies in the data. This involves creating new features that represent previous time points of the series.
+
+9. Feature Engineering - Engineer additional features that might help in modeling the time-series data, such as rolling statistics (mean, variance), time-based features (day of the week, month, quarter), and external factors (e.g., holidays, weather conditions).
+
+
+## Anomaly Detection
+Anomalies refer to data values or events that deviate significantly from the normal trend. Detecting and correcting anomalies is crucial before any analysis of data, as anomalies can lead to incorrect results and conclusions. However, the time dependence and often non-stationary nature of time series data make anomaly detection particularly complex.
+
+Anomaly detection methods:
+
+1. Z-Score Method - calculates the standard score of each data point to identify anomalies.
+2. Moving Average with Standard Deviation -  deviation of the point from the rolling moving average and standard deviation.
+3. Isolation Forest - an ensemble method designed for anomaly detection.
+4. One-Class SVM - One-Class Support Vector Machines can be used for anomaly detection.
+5. Kmeans clustering - unsupervised clustering can help identify anomalies.
+6. STL decomposition - “Seasonal and Trend decomposition using Loess”  decomposes time series into it seasonal, trend, and residue components. Residue component can be used to identify anomalies.
+7. Detection using Forecasting -  In forecasting we predict each point based on past data points using a forecasting method such as ARMA model. The deviation of actual value from the prediction can be used to identify anomalies.
+
+
 
 ## References
 0. https://otexts.com/fpp3/ 
