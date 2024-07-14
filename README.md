@@ -81,13 +81,13 @@ In summary, while both seasonality and cycles involve patterns of variation in t
 ## Stationarity
 Stationarity in time series data implies that statistical characteristics, such as mean, variance, and covariance, remain consistent over time. This stability is crucial for various time-series modeling techniques as it simplifies the underlying dynamics, facilitating accurate analysis, modeling, and forecasting. There are two primary types of stationarity in time-series:
 
-### Strict Stationarity: [1]
+### Strict Stationarity: [2]
 A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. Mathematically ${X_t}$ is strictly stationary:
 
 $$p(X_{t_1}, X_{t_2}, \ldots, X_{t_k}) = p(X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}) $$
 $$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
 
-### Covariance Stationarity (Weak Stationarity): [1]
+### Covariance Stationarity (Weak Stationarity): [2]
 A time series ${X_t}$ is covariance stationary (or weakly stationary) if the following conditions hold:
 
 1. The mean $E[X_t]$ is constant for all $t$.
@@ -578,7 +578,7 @@ https://github.com/AileenNielsen/TimeSeriesAnalysisWithPython
 
 ## References
 1. Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. OTexts.com/fpp3. Accessed on 01 July 2024.
-
+2. MIT, Topics in mathematics with application in finance. https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/pages/lecture-notes/
 1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
 2. https://online.stat.psu.edu/stat510/lesson/11/11.2
 3. https://en.wikipedia.org/wiki/Granger_causality
