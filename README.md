@@ -30,7 +30,7 @@ Time series data are characterized by:
 
 - **Trend**: A long-term increase or decrease in the data.
 - **Seasonality**: Influences from seasonal factors, such as the time of year or day of the week, occurring at fixed and known periods.
-- **Cyclic Patterns**: Rises and falls that do not occur at a fixed frequency, usually driven by economic conditions and often linked to the "business cycle," typically lasting at least two years.
+- **Cyclic Patterns**: Rises and falls that do not occur at a fixed frequency, usually driven by economic conditions and often linked to the "business cycle," typically lasting at least two years [1].
 
 
 ![Time Series Data](images/airline_timeseries.png)
@@ -51,28 +51,27 @@ Both auto-correlation and partial auto-correlation are useful in time series ana
 - **Identifying Seasonality**: Auto-correlation can help detect repeating patterns or seasonality in the data. Significant correlation at a specific lag suggests the data exhibits a repeating pattern at that interval.
 - **Model Selection**: Auto-correlation and partial auto-correlation guide the selection of appropriate models for time series forecasting. By analyzing the patterns in the correlogram, you can determine the order of autoregressive (AR) and moving average (MA) components in models like ARIMA (AutoRegressive Integrated Moving Average).
 
+## Seasonality
+Seasonality refers to the regular patterns or fluctuations in time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
+
+**How to identify seasonality in time-series models**: Seasonality in time-series can be identified by analyzing ACF plots:
+
+* Periodic Peaks: Observing peaks in the ACF plot at regular intervals indicates a seasonal lag. For instance, when analyzing monthly data for yearly seasonality, peaks would typically appear at lags 12, 24, 36, and so on. Similarly, quarterly data would show peaks at lags 4, 8, 12, etc.
+
+* Significant Peaks: Assessing the magnitude of autocorrelation coefficients at seasonal lags helps identify strong seasonal patterns. Higher peaks at seasonal lags compared to others suggest significant seasonality in the data.
+
+* Repetitive Patterns: Checking for repetitive patterns in the ACF plot aligned with the seasonal frequency reveals periodicity. Seasonal trends often exhibit repeated patterns of autocorrelation coefficients at seasonal lags.
+
+* Alternating Positive and Negative Correlations: Occasionally, observing alternating positive and negative autocorrelation coefficients at seasonal lags indicates a seasonal pattern.
+
+* Partial Autocorrelation Function (PACF): Complementing the analysis with PACF helps pinpoint the direct influence of a lag on the current observation, excluding indirect effects through shorter lags. Significant spikes in PACF at seasonal lags further confirm seasonality in the data.
+
+By carefully examining the ACF/PACF plot for these indicators, one can infer the presence of seasonal trends in time series data. This understanding is crucial for selecting appropriate forecasting models and devising strategies to manage seasonality effectively.
+
 ![ACF & PACF Correlogram](images/pacf_acf.png)
 The plots above show ACF and PACF Correlograms for the air line passenger data.
 * The ACF shows high values for the first few lags, gradually decreasing but still remaining significant for many lags. This indicates a strong autocorrelation in the data, suggesting that past values have a strong influence on future values.
 * For PACF there are significant peaks occur at lags 12, 24, etc., this suggests yearly seasonality effect in data.
-
-## Seasonality
-Seasonality refers to the regular patterns or fluctuations in time series data that occur at fixed intervals within a year, such as daily, weekly, monthly, or quarterly. Seasonality is often caused by external factors like weather, holidays, or economic cycles. Seasonal patterns tend to repeat consistently over time.
-
-How to identify seasonality in time-series models:
-
-* Identify Seasonality: Begin by examining the time series data to detect any patterns that repeat at regular intervals. Seasonality refers to variations in the data that occur at specific time intervals, such as daily, weekly, monthly, or quarterly patterns. Here's how you can identify a seasonal trend using the ACF:
-
-* Periodic Peaks: Look for peaks in the ACF plot at regular intervals, corresponding to the seasonal lag. For example, if you're analyzing monthly data and suspect a yearly seasonality, you would expect peaks at lags 12, 24, 36, and so on. Similarly, for quarterly data, peaks would occur at lags 4, 8, 12, and so forth.
-
-* Significant Peaks: Pay attention to the magnitude of the autocorrelation coefficients at seasonal lags. If the peaks at seasonal lags are significantly higher compared to other lags, it suggests a strong seasonal pattern in the data.
-
-* Repetitive Patterns: Check for repetitive patterns in the ACF plot that align with the seasonal frequency of the data. Seasonal trends often exhibit periodicity, resulting in a repeating pattern of autocorrelation coefficients at seasonal lags.
-Alternating Positive and Negative Correlations: In somae cases, you may observe alternating positive and negative autocorrelation coefficients at seasonal lags, indicating a seasonal pattern in the data.
-
-* Partial Autocorrelation Function (PACF): Additionally, you can complement your analysis with the Partial Autocorrelation Function (PACF), which helps identify the direct influence of a lag on the current observation, excluding the indirect effects through shorter lags. Significant spikes in PACF at seasonal lags provide further evidence of seasonality in the data.
-
-By carefully examining the ACF/PACF plot for these indicators, you can infer the presence of a seasonal trend in the time series data. This insight is crucial for selecting appropriate forecasting models and designing interventions to address seasonality in the data.
 
 ## Cycles
 Cycles, on the other hand, refer to fluctuations in a time series that are not of fixed frequency or period. They are typically longer-term patterns, often spanning several years, and are not as precisely defined as seasonal patterns. Cycles can be influenced by economic factors, business cycles, or other structural changes in the data.
@@ -80,21 +79,16 @@ Cycles, on the other hand, refer to fluctuations in a time series that are not o
 In summary, while both seasonality and cycles involve patterns of variation in time series data, seasonality repeats at fixed intervals within a year, whereas cycles represent longer-term fluctuations that may not have fixed periodicity.
 
 ## Stationarity
-Stationarity in time series data implies that statistical characteristics, such as mean, variance, and covariance, remain consistent over time. This stability is crucial for various time-series modeling techniques as it simplifies the underlying dynamics, facilitating accurate analysis, modeling, and forecasting.
+Stationarity in time series data implies that statistical characteristics, such as mean, variance, and covariance, remain consistent over time. This stability is crucial for various time-series modeling techniques as it simplifies the underlying dynamics, facilitating accurate analysis, modeling, and forecasting. There are two primary types of stationarity in time-series:
 
-There are two primary types of stationarity in time-series:
-
-### Strict Stationarity:
-
+### Strict Stationarity: [1]
 A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. 
 
 Mathematically ${X_t}$ is strictly stationary:
 $$p(X_{t_1}, X_{t_2}, \ldots, X_{t_k}) = p(X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}) $$
 $$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
 
-[cite MIT lectues]
-
-### Covariance Stationarity (Weak Stationarity):
+### Covariance Stationarity (Weak Stationarity): [1]
 A time series ${X_t}$ is covariance stationary (or weakly stationary) if the following conditions hold:
 
 1. The mean $E[X_t]$ is constant for all $t$.
@@ -583,6 +577,18 @@ https://github.com/AileenNielsen/TimeSeriesAnalysisWithPython
 
 
 
+## References
+1. Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. OTexts.com/fpp3. Accessed on 01 July 2024.
+
+1. https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity
+2. https://online.stat.psu.edu/stat510/lesson/11/11.2
+3. https://en.wikipedia.org/wiki/Granger_causality
+4. chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/http://lethalletham.com/ForecastingAtScale.pdf
+5. https://uk.mathworks.com/help/ident/ug/what-are-state-space-models.html
+
+
+
+#############################
 
 #########################
 # Practitioner's Guide to Time Series Modelling - III | Model Time Series Analaysis
