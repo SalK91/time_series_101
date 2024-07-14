@@ -85,6 +85,7 @@ Stationarity in time series data implies that statistical characteristics, such 
 A time series ${X_t}$ is strictly stationary if the joint distribution of $X_{t_1}, X_{t_2}, \ldots, X_{t_k}$ is the same as that of $X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}$ for all $h, k \in \mathbb{Z}$ and for all $t_1, t_2, \ldots, t_k $. This means that the statistical properties of the series are invariant to shifts in time. 
 
 Mathematically ${X_t}$ is strictly stationary:
+
 $$p(X_{t_1}, X_{t_2}, \ldots, X_{t_k}) = p(X_{t_1+h}, X_{t_2+h}, \ldots, X_{t_k+h}) $$
 $$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
 
