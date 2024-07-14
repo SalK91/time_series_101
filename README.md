@@ -91,8 +91,8 @@ $$\forall h, \forall k, \forall (t_1, t_2, \ldots, t_k )$$
 A time series ${X_t}$ is covariance stationary (or weakly stationary) if the following conditions hold:
 
 1. The mean $E[X_t]$ is constant for all $t$.
-2. The variance $\text{Var}(X_t) = E[(X_t - E[X_t])^2] $ is finite and constant for all $t$.
-3. The covariance $\text{Cov}(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
+2. The variance $ \text{Var}(X_t) = E[(X_t - E[X_t])^2]$ is finite and constant for all $t$.
+3. The covariance $ \text{Cov}(X_t, X_{t+h}) $ depends only on the lag $ h $ and not on $t$
 
 
 ### Unit Roots
