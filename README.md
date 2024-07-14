@@ -1,4 +1,4 @@
-# Practitioner's Guide to Time Series Modelling
+# Practitioner's Guide to Time Series Modelling - I
 
 Time series data represents a sequence of data points collected over time. Unlike other types of data, time series data has a temporal aspect, where the order and timing of the data points matter. This makes time series analysis unique and requires specialized techniques and models to understand and predict future patterns or trends.
 
