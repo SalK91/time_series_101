@@ -109,21 +109,19 @@ Non-stationary time series can be problematic for several reasons:
 
 3. Inefficient parameter estimation: Non-stationary time series can lead to inefficient parameter estimation. The estimates of model parameters may have large standard errors, reducing the precision and reliability of the estimated coefficients.
 
-To address the issue of unit roots and non-stationarity, techniques like differencing or transforming the data can be used to make the time series stationary. Differencing involves taking the difference between consecutive observations to remove the trend or seasonality in the data. Transformations like logarithmic or power transformations can also be applied to stabilize the variance of the series.
+To address the issue of non-stationarity, techniques like differencing or data transformation can be used to make the time series stationary. Differencing involves taking the difference between consecutive observations to remove the trend or seasonality in the data. Transformations like logarithmic or power transformations can also be applied to stabilize the variance of the series.
 
-**It is important to identify and address unit roots in time series analysis to ensure reliable and accurate modeling and forecasting.**
+**It is important to identify and address non-stationarity in time series analysis to ensure reliable and accurate modeling and forecasting.**
 
 
-### Dickey Fuller Test & Augmented Dickey Fuller Test
-The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series data set is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
-
+### Dickey-Fuller Test & Augmented Dickey-Fuller Test
+The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical tests used to determine if a time series dataset is stationary or not. Stationarity is an important concept in time series analysis, as it assumes that the statistical properties of the data, such as mean and variance, remain constant over time.
 
 ### How to make Time Series Stationary if it is not stationary?
-* Differencing:  e.g First-order Differencing: Subtract the previous observation from the current observation. If the time series has seasonality, seasonal differencing can be applied.
-* Transformations: Transformations like logarithm, square root, or Box-Cox can stabilize the variance.
-* Decomposition: Decompose the time series into trend, seasonal, and residual components.
-* Detrending e.g. Subtracting the Rolling Mean or Fitting and Removing a Linear Trend.
-
+* Differencing: For example, First-order Differencing involves subtracting the previous observation from the current observation. If the time series has seasonality, seasonal differencing can be applied.
+* Transformations: Techniques like logarithm, square root, or Box-Cox can stabilize the variance.
+* Decomposition: Decomposing the time series into trend, seasonal, and residual components.
+* Detrending: For instance, subtracting the Rolling Mean or fitting and removing a Linear Trend.
 
 ## Modelling Univariate Time Series
 
