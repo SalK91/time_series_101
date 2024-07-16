@@ -147,6 +147,8 @@ where:
 Exponential smoothing is a time series forecasting technique that applies weighted averages to past observations, giving more weight to recent observations while exponentially decreasing the weight for older observations. This method is useful for making short-term forecasts and smoothing out irregularities in the data.
 
 #### Simple Exponential Smoothing:
+Simple exponential smoothing is a technique where the forecast for the next period is calculated as a weighted average of the current period's observation and the previous forecast. This technique is suitable for time series data without trend or seasonality.
+
 
 The forecast for time $t+1$ is calculated as:
 
