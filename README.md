@@ -245,7 +245,27 @@ Where:
 - $\Theta_j$: Parameters for seasonal moving average terms.
 - $\beta_i$: Parameters for the exogenous variables $x_{i,t}$.
 
+###  Example SARIMAX Model
+#### SARIMA (1, 1, 0)x(0, 1, 0, 12)
+The SARIMA can be decomposed into two parts: the non-seasonal ARIMA component and the seasonal component.
+* Non-Seasonal ARIMA(1,1,0) Component
+  - $ d=1 \implies Z_t = W_t - W_{t-1} $
+  - $ p = 1 \ \& \ q=0 \implies Z_t = \phi_1 Z_{t-1} + 
+\epsilon_t $
+  * This yeilds: $ W_t = (1 + \phi_1) W_{t-1} - \phi_1 W_{t-2} + \epsilon_t $
+* Seasonal (0,1,0)[12] Component
+  - $s = 12$ Seasonal period of 12 (monthlty data)
+  - $ D=1 \implies W_t = Y_t - Y_{t-12} $
+  - $ P = 0 \ \& \ Q=0 \implies$ no AR and MA terms
+* Combined SARIMA Model
+  1. Seasonal Model:  $W_t =  Y_t - Y_{t-12}$
+  2. Non-seasonal Model: $W_t = (1 + \phi_1) W_{t-1} - \phi_1 W_{t-2} + \epsilon_t $
+  - Substitue (1) in (2): $ Y_t - Y_{t-12} = (1 + \phi_1) (Y_{t-1} - Y_{t-13}) - \phi_1 (Y_{t-2} - Y_{t-14}) + \epsilon_t $
 
+Rearranging gives the final equation for the SARIMA(1,1,0)(0,1,0)[12] model:
+
+$ Y_t = Y_{t-12} + (1 + \phi_1) (Y_{t-1} - Y_{t-13}) - \phi_1 (Y_{t-2} - Y_{t-14}) + \epsilon_t $
+ 
 
 ## Modelling Volatility
 Volatility in the context of time series refers to the degree of variation or dispersion in the series over time. It is a measure of how much the series deviates from its average or expected value. Volatility is particularly relevant in financial markets but can also apply to other types of time series data where variability is important to understand or predict.
