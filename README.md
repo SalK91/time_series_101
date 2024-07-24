@@ -128,9 +128,7 @@ The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical test
 
 ### Wold Representation Theorem
 The Wold decomposition theorem states that any covariance stationary process can be decomposed into two mutually uncorrelated components. The first component is a linear combination of past values of a white noise process, while the second component consists of a process whose future values can be precisely predicted by a linear function of past observations.
-
 $$ X_t = V_t + S_t $$
-
 where:
 - ${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
 
