@@ -237,25 +237,25 @@ The SARIMAX model is defined by the parameters (p, d, q) and (P, D, Q, s):
 - **Exogenous Variables (X)**: These are external variables that can influence the time series but are not part of the series itself. For example, economic indicators or weather data might be included as exogenous variables.
 
 #### Non-seasonal AR and MA Components:
-AR: $ \phi(B) = 1 - \phi_1 B - \phi_2 B^2 - \dots - \phi_p B^p $
+AR: $\phi(L) = 1 - \phi_1 L - \phi_2 L^2 - \dots - \phi_p L^p$
 
-MA: $ \theta(B) = 1 + \theta_1 B + \theta_2 B^2 + \dots + \theta_q B^q $ 
+MA: $ \theta(L) = 1 + \theta_1 L + \theta_2 L^2 + \dots + \theta_q L^q$ 
 
 #### Seasonal AR and MA Components:
 
-SAR: $ \Phi(B^s) = 1 - \Phi_1 B^s - \Phi_2 B^{2s} - \dots - \Phi_P B^{Ps} $
+SAR: $\Phi(L^s) = 1 - \Phi_1 L^s - \Phi_2 L^{2s} - \dots - \Phi_P L^{Ps}$
 
-SMA: $ \Theta(B^s) = 1 + \Theta_1 B^s + \Theta_2 B^{2s} + \dots + \Theta_Q B^{Qs} $
+SMA: $\Theta(L^s) = 1 + \Theta_1 L^s + \Theta_2 L^{2s} + \dots + \Theta_Q L^{Qs}$
 
 #### SARIMAX Model Equation:
 
-$\Phi(B^s)\phi(B)(1 - B)^d (1 - B^s)^D y_t = \Theta(B^s)\theta(B)\varepsilon_t + \mathbf{X}_t \beta $
+$\Phi(L^s)\phi(L)(1 - L)^d (1 - L^s)^D y_t = \Theta(L^s)\theta(L)\varepsilon_t + \mathbf{X}_t \beta $
 
-- **$\Phi(B^s)\phi(B)$**: encapsulates the non-seasonal and seasonal AR terms.
-- **$\Theta(B^s)\theta(B)$**: encapsulates the non-seasonal and seasonal MA terms.
-- **$(1 - B)^d (1 - B^s)^D$**: represents the differencing operations, making the series stationary.
-- **$\mathbf{X}_t$**: represents the exogenous variables with their coefficients $\beta$.
-- **$\varepsilon_t$**: represents the residuals (white noise).
+- $\Phi(L^s)\phi(L)$**: captures the non-seasonal and seasonal AR terms.
+- $\Theta(L^s)\theta(L)$**: captures the non-seasonal and seasonal MA terms.
+- $(1 - L)^d (1 - L^s)^D$**: represents the differencing operations, making the series stationary.
+- $\mathbf{X}_t$: represents the exogenous variables with their coefficients $\beta$.
+- $\varepsilon_t$: represents the residuals (white noise).
 
 \
 \
