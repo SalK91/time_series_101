@@ -143,6 +143,14 @@ where:
 
 **The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
 
+Lag Operator 
+The lag operator (L) helps to succinctly represent the  differencing operations. It shifts a time-series back by one time increment.
+
+* $L(X_t) = X_{t-1}$
+* $L^n (X_t) = X_{t-n}$
+
+
+
 ### Exponential Smoothing
 Exponential smoothing is a time series forecasting technique that applies weighted averages to past observations, giving more weight to recent observations while exponentially decreasing the weight for older observations. This method is useful for making short-term forecasts and smoothing out irregularities in the data.
 
@@ -265,7 +273,10 @@ The SARIMA can be decomposed into two parts: the non-seasonal ARIMA component an
 Rearranging gives the final equation for the SARIMA(1,1,0)(0,1,0)[12] model:
 
 $ Y_t = Y_{t-12} + (1 + \phi_1) (Y_{t-1} - Y_{t-13}) - \phi_1 (Y_{t-2} - Y_{t-14}) + \epsilon_t $
- 
+
+$$
+\underbrace{(1 - \phi_1 B)}_{\text{(Non-seasonal) AR(1)}} \underbrace{(1 - \Phi_1 B^{s})}_{\text{Seasonal AR(1)}} (1 - B)(1 - B^{s}) y_t = \underbrace{(1 + \theta_1 B)}_{\text{(Non-seasonal) MA(1)}} \underbrace{(1 + \Theta_1 B^{s})}_{\text{Seasonal MA(1)}} e_t
+$$
 
 ## Modelling Volatility
 Volatility in the context of time series refers to the degree of variation or dispersion in the series over time. It is a measure of how much the series deviates from its average or expected value. Volatility is particularly relevant in financial markets but can also apply to other types of time series data where variability is important to understand or predict.
