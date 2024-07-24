@@ -239,7 +239,7 @@ The SARIMAX model is defined by the parameters (p, d, q) and (P, D, Q, s):
 #### Non-seasonal AR and MA Components:
 AR: $\phi(L) = 1 - \phi_1 L - \phi_2 L^2 - \dots - \phi_p L^p$
 
-MA: $ \theta(L) = 1 + \theta_1 L + \theta_2 L^2 + \dots + \theta_q L^q$ 
+MA: $\theta(L) = 1 + \theta_1 L + \theta_2 L^2 + \dots + \theta_q L^q$ 
 
 #### Seasonal AR and MA Components:
 
@@ -251,9 +251,9 @@ SMA: $\Theta(L^s) = 1 + \Theta_1 L^s + \Theta_2 L^{2s} + \dots + \Theta_Q L^{Qs}
 
 $\Phi(L^s)\phi(L)(1 - L)^d (1 - L^s)^D y_t = \Theta(L^s)\theta(L)\varepsilon_t + \mathbf{X}_t \beta $
 
-- $\Phi(L^s)\phi(L)$**: captures the non-seasonal and seasonal AR terms.
-- $\Theta(L^s)\theta(L)$**: captures the non-seasonal and seasonal MA terms.
-- $(1 - L)^d (1 - L^s)^D$**: represents the differencing operations, making the series stationary.
+- $\Phi(L^s)\phi(L)$: captures the non-seasonal and seasonal AR terms.
+- $\Theta(L^s)\theta(L)$: captures the non-seasonal and seasonal MA terms.
+- $(1 - L)^d (1 - L^s)^D$: represents the differencing operations, making the series stationary.
 - $\mathbf{X}_t$: represents the exogenous variables with their coefficients $\beta$.
 - $\varepsilon_t$: represents the residuals (white noise).
 
