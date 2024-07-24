@@ -159,17 +159,15 @@ Simple exponential smoothing is a technique where the forecast for the next peri
 
 The forecast for time $t+1$ is calculated as:
 
-$$l_{t+1} = {y} _{t+1|t} = \alpha y_t + \alpha (1 - \alpha) y_{t-1} + \alpha (1 - \alpha)^2 y_{t-2} + \alpha (1 - \alpha)^3 y_{t-3} + \cdots$$
-
-$$l_{t+1} = \hat{y} _{t+1|t} = \alpha y_t + \alpha (1 - \alpha) y_{t-1} + \alpha (1 - \alpha)^2 y_{t-2} + \alpha (1 - \alpha)^3 y_{t-3} + \cdots$$
+$$l_{t+1} = \alpha y_t + \alpha (1 - \alpha) y_{t-1} + \alpha (1 - \alpha)^2 y_{t-2} + \alpha (1 - \alpha)^3 y_{t-3} + \cdots$$
 
 $$
 l_{t+1} =  \alpha y_t + (1 - \alpha) l_{t} $$
 
 where:
 
-- $l_{t+1}/ \hat{y}_{t+1|t} $ is the forecast for the next time period.
-- $\alpha $ is the smoothing parameter (0 < $\alpha$ < 1).
+- $l_{t+1}$ is the forecast for the next time period.
+- $\alpha$ is the smoothing parameter (0 < $\alpha$ < 1).
 - $y_t$ is the actual value at time $t$.
 - $y_{t-1}$ is the actual value at time $t-1$.
 
