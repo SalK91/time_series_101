@@ -132,9 +132,11 @@ The Wold decomposition theorem states that any covariance stationary process can
 $$ X_t = V_t + S_t $$
 
 where:
-- ${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
 
-- $S_t = {{\sum}_{i=0}^{\infty}} \psi_i \eta_{t-i}$ is an infinite moving average process of error terms, where
+${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
+
+$$S_t = {\sum}_{i=0}^{\infty} \psi_i \eta_{t-i}$$ 
+is an infinite moving average process of error terms, where
 
   - $\psi_0 = 1, \sum_{i=0}^{\infty} \psi_i^2 < \infty$
 
