@@ -135,7 +135,7 @@ where:
 
 ${V_t}$ is a linearly deterministic process, i.e. a linear combination of past values of $V_t$ with constant coefficients.
 
-$ S_t = \sum_{i=0}^{\infty} $ 
+$ S_t = \sum$ 
 
 
 $ S_t = \sum_{i=0}^{\infty} \psi_i \eta_{t-i}
