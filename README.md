@@ -137,9 +137,7 @@ where:
 - $S_t = {{\sum} _{i=0} ^{\infty}} \psi_i \eta _{t-i}$ is an infinite moving average process of error terms, where
 
   - $\psi_0 = 1, {{\sum} _{i=0} ^{\infty}} \psi_i^2 < \infty$
-  - $\eta_{t}$ is linearly unpredictable white noise, i.e.,
-
-  - $E(\eta _{t}) = 0, \ E(\eta _{t} ^2) = \sigma^2, \ E(\eta _{t} \eta _{s}) = 0 \ \forall t, \ \forall s \neq t $
+  - $\eta_{t}$ is linearly unpredictable white noise, i.e., $E(\eta _{t}) = 0, \ E(\eta _{t} ^2) = \sigma^2, \ E(\eta _{t} \eta _{s}) = 0 \ \forall t, \ \forall s \neq t $
     and $\eta _{t}$ is uncorrelated with $V_t$ i.e. $E(\eta _{t} V_s) = 0, \forall \  t, s$
 
 **The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
