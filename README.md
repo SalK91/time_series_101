@@ -132,14 +132,16 @@ $$ X_t = V_t + S_t $$
 
 where:
 - ${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
+- \( S_t = \sum_{i=0}^{\infty} \psi_i \eta_{t-i} \) is an infinite moving average process of error terms, where:
 
-- $S_t = {\sum_{i=0}^{\infty}} \psi_i \eta_{t-i}$ is an infinite moving average process of error terms, where
+  - \( \psi_0 = 1, \quad \sum_{i=0}^{\infty} \psi_i^2 < \infty \)
 
-  - $\psi_0 = 1, \sum_{i=0}^{\infty} \psi_i^2 < \infty$
+  - \( \eta_t \) is linearly unpredictable white noise, i.e.,
 
-  - $ \eta_t $ is linearly unpredictable white noise, i.e.,
-    $$  E(\eta_t) = 0, \quad E(\eta_t^2) = \sigma^2, \quad E(\eta_t \eta_s) = 0 \ \forall t, \ \forall s \neq t $$
-    and $ \eta_t $ is uncorrelated with $ V_t $: $ E(\eta_t V_s) = 0, \forall \  t, s $
+    \( E(\eta_t) = 0, \quad E(\eta_t^2) = \sigma^2, \quad E(\eta_t \eta_s) = 0 \ \forall t, \ \forall s \neq t \)
+
+    and \( \eta_t \) is uncorrelated with \( V_t \): \( E(\eta_t V_s) = 0, \forall \ t, s \)
+
 
 **The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
 
