@@ -136,12 +136,12 @@ where:
 ${V_t}$ is a linearly deterministic process, i.e. a linear combination of past values of $V_t$ with constant coefficients.
 
 $$ S_t = \sum _{i=0} ^{\infty} \psi_i \eta _{t-i} 
-\text{ \ \ is an infinite moving average process of error terms } $$
+\text{ \ \ is an infinite moving average process of error terms. 
+ } \psi_0 = 1,\sum _{i=0}^{\infty} \psi_i^2 < \infty $$
  
 
-$\psi_0 = 1$ 
 
-$$\sum_{i=0}^{\infty} \psi_i^2 < \infty$$
+
 $ \eta_t $ is linearly unpredictable white noise, i.e.,
 
 $$  E(\eta_t) = 0, \quad E(\eta_t^2) = \sigma^2, \quad E(\eta_t \eta_s) = 0 \ \forall t, \ \forall s \neq t $$
