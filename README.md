@@ -159,6 +159,8 @@ Simple exponential smoothing is a technique where the forecast for the next peri
 
 The forecast for time $t+1$ is calculated as:
 
+$$l_{t+1}$$
+
 $$l_{t+1} = \hat{y} _{t+1|t} = \alpha y_t + \alpha (1 - \alpha) y_{t-1} + \alpha (1 - \alpha)^2 y_{t-2} + \alpha (1 - \alpha)^3 y_{t-3} + \cdots$$
 
 $$
