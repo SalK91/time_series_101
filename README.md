@@ -1,4 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 # Practitioner's Guide to Time Series Modelling - I (Classical Time Series Analysis)
 
@@ -131,11 +130,12 @@ The Dickey-Fuller Test and the Augmented Dickey-Fuller Test are statistical test
 The Wold decomposition theorem states that any covariance stationary process can be decomposed into two mutually uncorrelated components. The first component is a linear combination of past values of a white noise process, while the second component consists of a process whose future values can be precisely predicted by a linear function of past observations.
 
 $$ X_t = V_t + S_t $$
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 where:
 - ${V_t}$ is a linearly deterministic process, i.e., a linear combination of past values of $V_t$ with constant coefficients.
 
-- $S_t = {\sum_{i=0}^{\infty}} \psi_i \eta_{t-i}$ is an infinite moving average process of error terms, where
+- $S_t = $ ${\sum_{i=0}^{\infty}}$ $ \psi_i \eta_{t-i}$ is an infinite moving average process of error terms, where
 
   - $\psi_0 = 1, \sum_{i=0}^{\infty} \psi_i^2 < \infty$
 
