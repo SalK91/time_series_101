@@ -142,7 +142,7 @@ where:
 
 **The theorem is fundamental in time series analysis, providing a framework for understanding and modeling stationary time series.**
 
-Lag Operator 
+### Lag Operator Representation 
 The lag operator (L) helps to succinctly represent the  differencing operations. It shifts a time-series back by one time increment.
 
 * $L(X_t) = X_{t-1}$
@@ -183,6 +183,9 @@ The ARMA model can be represented by the following equation:
 
 $$Y_t = c + \phi_1  Y_{t-1} + \phi_2 Y_{t-2} + ... + \phi_p  Y_{t-p} + \epsilon_t + \beta_1 \epsilon_{t-1} + \beta_2  \epsilon_{t-2} + ... + \beta_q  \epsilon_{t-q}$$
 
+or in lag operator notation:
+
+$$\phi(L) Y_t = (1 + \beta(L)) \epsilon_t$$
 
 
 where:
@@ -193,6 +196,8 @@ where:
 - $\beta_1, \beta_2, ..., \beta_q$ are the moving average coefficients.
 - $Y_{t-1}, Y_{t-2}, ..., Y_{t-p}$ are the lagged values of the time series.
 - $\epsilon_{t-1}, \epsilon_{t-2}, ..., \epsilon_{t-q}$ are the lagged forecast errors.
+- $\phi(L) =  1 - \phi_1 L - \phi_2 L^2 - \cdots - \phi_p L^p $
+- $\beta(L) = 1 + \beta_1 B + \beta_2 L^2 + \cdots + \beta_q L^q$
 
 The ARMA model is commonly used for time series forecasting and can be estimated using various methods, such as maximum likelihood estimation or least squares estimation.
 
