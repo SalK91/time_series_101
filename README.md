@@ -135,8 +135,9 @@ where:
 
 ${V_t}$ is a linearly deterministic process, i.e. a linear combination of past values of $V_t$ with constant coefficients.
 
-$$ S_t = \sum _{i=0} ^{\infty} \psi_i \eta _{t-i} $$
-is an infinite moving average process of error terms, 
+$$ S_t = \sum _{i=0} ^{\infty} \psi_i \eta _{t-i} 
+\text{ \ \ is an infinite moving average process of error terms } $$
+ 
 
 $\psi_0 = 1$ 
 
