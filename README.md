@@ -315,7 +315,7 @@ Volatility in a time series, particularly in the context of finance, is often me
 
 * Given asset Prices at $(T + 1)$ Time Points: 
 
-$$\{P _{t}, t = 0, 1, 2, \ldots, T\}$$
+$$\{P _{t}, \quad t = 0, 1, 2, \ldots, T\}$$
 
 * Asset Returns for $T$ Time Periods is computed as:
 
