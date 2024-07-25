@@ -314,12 +314,15 @@ Volatility in the context of time series refers to the degree of variation or di
 Volatility in a time series, particularly in the context of finance, is often measured as the annualized standard deviation change in price or value of a financial security  e.g. for asset price voltatilty is computed as follows [MIT Course]
 
 * Given asset Prices at $(T + 1)$ Time Points: 
-$$\{P_t, t = 0, 1, 2, \ldots, T\}$$
+
+$$\{P _{t}, t = 0, 1, 2, \ldots, T\}$$
 
 * Asset Returns for $T$ Time Periods is computed as:
-  $$R_t = \log(P_t / P_{t-1}), \quad t = 1, 2, \ldots, T$$
+
+$$R_t = \log(P_t / P_{t-1}), \quad t = 1, 2, \ldots, T$$
 
 * Assuming Covariance Stationarity of $\{R_t\}$, standard deviation is computed as:
+
   $$\sigma = \sqrt{\text{var}(R_t)} = \sqrt{E[(R_t - E[R_t])^2]}$$
 
   with the sample estimate:
