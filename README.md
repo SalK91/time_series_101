@@ -326,10 +326,12 @@ $$R_t = \log(P_t / P_{t-1}), \quad t = 1, 2, \ldots, T$$
   $$\sigma = \sqrt{\text{var}(R_t)} = \sqrt{E[(R_t - E[R_t])^2]}$$
 
   with the sample estimate:
+
   $$\hat{\sigma} = \sqrt{\frac{1}{T-1} \sum_{t=1}^T (R_t - \bar{R})^2}, \quad \text{where} \quad \bar{R} = \frac{1}{T} \sum_{t=1}^T R_t$$
 
 * Annualized Volatility:
-  $$\hat{\text{voltality}} = 
+
+  $$= 
   \begin{cases}
     \sqrt{252} \hat{\sigma} & \text{(daily prices, assuming 252 trading days/year)} \\
     \sqrt{52} \hat{\sigma} & \text{(weekly prices)} \\
