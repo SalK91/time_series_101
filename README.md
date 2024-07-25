@@ -331,14 +331,10 @@ $$\hat{\sigma} = \sqrt{\frac{1}{T-1} \sum_{t=1}^T (R_t - \bar{R})^2}, \quad \tex
 
 * Annualized Volatility:
 
+$$=$$
+
+
 $$\hat{\text{voltality}} = 
-  \begin{cases}
-   \sqrt{252} \hat{\sigma} \\ 2 \\ 3
-  \end{cases}$$
-
-
-
-  $$\hat{\text{voltality}} = 
   \begin{cases}
     \sqrt{252} \hat{\sigma} & \text{(daily prices, assuming 252 trading days/year)} \\
     \sqrt{52} \hat{\sigma} & \text{(weekly prices)} \\
