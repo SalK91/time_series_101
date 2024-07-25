@@ -333,7 +333,7 @@ $$\hat{\sigma} = \sqrt{\frac{1}{T-1} \sum_{t=1}^T (R_t - \bar{R})^2}, \quad \tex
 
 $$\hat{\text{voltality}} = 
   \begin{cases}
-   1 \\ 2 \\ 3
+   \sqrt{252} \hat{\sigma} \\ 2 \\ 3
   \end{cases}$$
 
 
