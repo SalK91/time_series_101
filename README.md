@@ -456,6 +456,7 @@ The volatility term $\sigma^2(t)$ in the GARCH(1, 1) model is defined as:
 
 The ARCH and GARCH models are crucial in modeling time series data with time-varying volatility. ARCH models capture conditional heteroskedasticity by modeling volatility as a function of past squared errors, while GARCH models extend this to include past volatility terms, providing a more comprehensive framework for volatility modeling.
 
+
  
 
 ## Review - ARMA & GARCH
