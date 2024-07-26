@@ -437,7 +437,7 @@ The ARCH(1) model can be generalized to an ARCH(p) model, where the volatility t
 $$ \text{ARCH}(p): \quad \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} + \ldots + \alpha_p a^2_{t-p} $$
 
 where:
-- $ \sigma^2_t $ is the conditional variance of the time series at time t.
+- $ \sigma _{t} ^2$ is the conditional variance of the time series at time t.
 - $a_t$ is the error term at time t.
 - $\alpha_0, \alpha_1, \alpha_2, \ldots, \alpha_p$ are parameters to be estimated.
 - $p$ is the order of the ARCH model, indicating how many past squared residuals are included in the model.
