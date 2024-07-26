@@ -371,6 +371,8 @@ $$
 
 Here, $\hat{\sigma}^2_t$ is the squared volatility observed at the current time $t$, $\tilde{\sigma}^2_t$ is the previous estimate of volatility, and $\beta$ is a smoothing factor where $0 \leq \beta \leq 1$.
 
+
+
 #### Exponential Weighted Moving Average (EWMA)
 
 Similar to EMA, EWMA estimates volatility at time step $t+1$ using an exponentially weighted average of past squared volatilities:
