@@ -455,7 +455,7 @@ The final formulation of the ARCH(p) model is:
 
    $$\sigma^2(t) = \alpha_0 + \sum_{i=1}^{p} \alpha_i a^2(t-i)$$
 
-   where $\epsilon(t)$ is white noise with zero mean and unit variance ($\epsilon (t) \sim N(0, 1)$).
+   where $\epsilon(t)$ is white noise.
 
 
 To estimate the parameters, one typically uses maximum likelihood estimation (MLE) or other estimation techniques. Once the parameters are estimated, the model can be used to forecast the conditional variance of the time series into the future.
