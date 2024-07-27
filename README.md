@@ -650,7 +650,9 @@ Cross-validation involves dividing the time series into training and testing set
 |Akaike Information Criterion (AIC)| $AIC = 2k - 2\ln(L)$                          | Measures model fit by considering the number of parameters ($k$) and the likelihood ($L$_).                   |
 |Bayesian Information Criterion (BIC)| $BIC = k\ln(n) - 2\ln(L)$                      | Similar to AIC but includes a penalty for the number of data points, discouraging overfitting.   |
 |Hannan-Quinn Criterion (HQ)          | $HQ = 2k \ln(\ln(n)) - 2\ln(L)$                | A criterion that balances model complexity and goodness of fit, considering the number of data points. |
-|Cross Validation                     | MSE: $\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$  MAE: $\frac{1}{n} \sum_{i=1}^{n} \|y_i - \hat{y}_i\|$ | Evaluates model performance by splitting data into training and testing sets. Uses Mean Squared Error (MSE) or Mean Absolute Error (MAE) for evaluation. |
+|Cross Validation                     | MSE: $\frac{1}{n} \sum _{i=1} ^{n} (y_i - \hat{y}_i)^2$ | Evaluates model performance by splitting data into training and testing sets. Uses Mean Squared Error (MSE) or Mean Absolute Error (MAE) for evaluation. |
+
+
 
 
 https://www.youtube.com/playlist?list=PLRRxOfxVBikdM1SbWQlCd8ENfN8ZuJ_js
